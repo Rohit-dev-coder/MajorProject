@@ -23,6 +23,11 @@
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
+
+
+    <!-- myscript -->
+    <script src="jsScripts/dashboard.js"></script>
+
 </head>
 
 <body>
@@ -62,31 +67,31 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="#" onclick="showContent(this)">
                                 <span data-feather="home"></span>
                                 Dashboard <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#quizes">
+                            <a class="nav-link" href="#quizes" onclick="showContent(this)">
                                 <span data-feather="file"></span>
                                 Exams
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="#" onclick="showContent(this)">
                                 <span data-feather="check-square"></span>
                                 Result
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="#" onclick="showContent(this)">
                                 <span data-feather="users"></span>
                                 Fourum
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="#" onclick="showContent(this)">
                                 <span data-feather="settings"></span>
                                 Settings
                             </a>
@@ -100,10 +105,8 @@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                 <div id = "user-dashboard"
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h1 class="h2">
-                        <!-- dynamically changed title -->
-                        Title
-                    </h1>
+                    <!-- dynamically changed title -->
+                    <h1 class="h1 body-title">Title</h1>
                     <div class="data-result">
                         <!-- body of the title goes here                         -->
                     </div>
