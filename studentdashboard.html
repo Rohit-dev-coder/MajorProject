@@ -39,8 +39,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">HOME</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">ABOUT US</a>
@@ -67,34 +67,34 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#" onclick="showContent(this)">
+                            <span class="nav-link active" id="Profile" onclick="showContent(this)" >
                                 <span data-feather="home"></span>
-                                Dashboard <span class="sr-only">(current)</span>
-                            </a>
+                                Profile
+                            </span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#quizes" onclick="showContent(this)">
+                            <span class="nav-link" id="Exams" onclick="showContent(this)">
                                 <span data-feather="file"></span>
                                 Exams
-                            </a>
+                            </span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="showContent(this)">
+                            <span class="nav-link" id="Result" onclick="showContent(this)">
                                 <span data-feather="check-square"></span>
                                 Result
-                            </a>
+                            </span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="showContent(this)">
+                            <span class="nav-link" id="Forum" onclick="showContent(this)">
                                 <span data-feather="users"></span>
-                                Fourum
-                            </a>
+                                Forum
+                            </span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="showContent(this)">
+                            <span class="nav-link" id="Settings" onclick="showContent(this)">
                                 <span data-feather="settings"></span>
                                 Settings
-                            </a>
+                            </span>
                         </li>
                     </ul>
 
@@ -106,13 +106,16 @@
                 <div id = "user-dashboard"
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                     <!-- dynamically changed title -->
-                    <h1 class="h1 body-title">Title</h1>
+                    <h1 class="h1">Profile</h1>
+
+
                     <div class="data-result">
-                        <!-- body of the title goes here                         -->
+                        <!-- body of the title goes here  -->
                     </div>
                 </div>
 
             </main>
+
            
         </div>
     </div>

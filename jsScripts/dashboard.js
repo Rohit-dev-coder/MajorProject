@@ -1,9 +1,20 @@
+// default
+
+
+
+
+
 function showContent(e)
 {
    
-    let selectTab = e.text;
+    var id = e.getAttribute("id");
     let bodyTitle = document.querySelector("h1.h1");
-    bodyTitle.innerHTML = selectTab;
-    alert(e.classlist);
+    bodyTitle.innerHTML = id;
 
+    let tabLinks = document.querySelector(".sidebar .nav-link.active");
+    tabLinks.classList.remove("active");
+
+    
+    let atabLinks = document.querySelector(".sidebar #"+id);
+    atabLinks.classList.add("active");    
 }
