@@ -12,6 +12,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <link rel="stylesheet" href="css/registration.css">
     <link href="https://fonts.googleapis.com/css?family=Acme|Arvo&display=swap" rel="stylesheet">
+    <script src="jsScripts/register.js"></script>
 </head>
 
 <body>   
@@ -56,26 +57,26 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="firstname">First Name :</label>
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" placeholder="" id="firstname">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="firstname">Last Name :</label>
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" placeholder="" id="secondname">
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-lg-12">
                         <label for="email">Email :</label>
-                        <input type="email" class="form-control" placeholder="Ex. jonh@gmail.com">
+                        <input type="email" class="form-control" placeholder="Ex. jonh@email.com" id="email">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="mobileno">Mobile No :</label>
-                        <input type="email" class="form-control" maxlength="10">
+                        <input type="text" class="form-control" maxlength="10" id="mobileno">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="gender">Gender :</label>
@@ -89,19 +90,19 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="password">Password :</label>
-                        <input type="password" class="form-control">
+                        <input type="password" class="form-control" id="pwd">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="repassword">Re-Password :</label>
-                        <input type="password" class="form-control">
+                        <input type="password" class="form-control" id="repwd">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6">
-                        <button class="btn btn-lg btn-info btn-block mt-1">Submit</button>
+                        <button class="btn btn-lg btn-info btn-block mt-1" onclick="addUser()">Submit</button>
                     </div>
                     <div class="col-md-6">
-                        <button class="btn btn-lg btn-danger btn-block mt-1">Clear</button>
+                        <button class="btn btn-lg btn-danger btn-block mt-1" onclick="clearForm()">Clear</button>
                     </div>  
                 </div>
                 <br>
