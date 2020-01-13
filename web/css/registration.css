@@ -4,7 +4,7 @@
 #e0e7e9 */
 
 body{
-    background-image: url("../bgimages/img2.jpg");
+    background-image: url("../bgimages/img8.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -34,4 +34,6 @@ body{
     text-align: left;
 }
 
-
+.errorbox{
+    color: red;
+}
