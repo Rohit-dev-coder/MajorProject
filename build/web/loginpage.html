@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TechQuiz</title>
+    <link rel="stylesheet" href="bootstrapfiles/bootstrap.min.css">
+    <script src="bootstrapfiles/jquery-3.4.1.js"></script>
+    <script src="bootstrapfiles/bootstrap.bundle.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <style>
+        .mybox1 {
+            text-align: center;
+            padding-top: 100px;
+            height: 595px;
+            background-image: url("bgimages/img9.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: rgb(250, 225, 217);
+        }
+
+        .mybox2 {
+            text-align: center;
+            background-image: url("bgimages/img8.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding-top: 100px;
+            height: 595px;
+            color: rgb(237, 243, 184);
+            /* background: linear-gradient(rgba(224, 247, 247, 0.527),rgba(80, 204, 226, 0.664)); */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- top navbar starts  -->
+    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
+        <a class="navbar-brand" href="#">TechQuiz</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">FORUM</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">CONTACT US</a>
+                </li>
+            </ul>
+            <div class="btn-group mt-2">
+                <button type="button" class="btn btn-info">LOGIN</button>
+                <button type="button" class="btn btn-outline-info">REGISTER</button>
+            </div>
+        </div>
+    </nav>    
+    <!-- top navbar End  -->
+
+
+
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 mybox1">
+                <p class="display-1"><i class="fa fa-user-circle"></i></p>
+                <h1 class="t">Student Login</h1>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#studentmodal">
+                    Login as Student
+                </button>
+                <div class="modal" id="studentmodal" tabindex="-1" role="dialog" aria-labelledby="studentmodallabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h1 style="color: blue; font-family: Georgia, 'Times New Roman', Times, serif">Student
+                                </h1><br>
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="username"
+                                            placeholder="UserName"><br>
+                                        <input type="password" class="form-control" name="password"
+                                            placeholder="Password">
+                                    </div>
+                                </form>
+                                <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
+                                <button type="button" class="btn btn-secondary btn-block"
+                                    data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mybox2">
+                <p class="display-1"><i class="fa fa-user"></i></p>
+                <h1>Teacher Login</h1>
+                <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#teachermodal">Login
+                    as Teacher</button>
+                <div class="modal" id="teachermodal" tabindex="-1" role="dialog" aria-labelledby="teachermodallabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h1 style="color: blue; font-family: Georgia, 'Times New Roman', Times, serif">TEACHER
+                                </h1><br>
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="username"
+                                            placeholder="UserName"><br>
+                                        <input type="password" class="form-control" name="password"
+                                            placeholder="Password">
+                                    </div>
+                                </form>
+                                <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
+                                <button type="button" class="btn btn-secondary btn-block"
+                                    data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+/* #354649
+#6c7a89
+#a3c6c4
+#e0e7e9 */
+
+body{
+    background-image: url("../bgimages/img8.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#register-container{
+    background-color: #354649;
+    margin-top: 20px;
+    color: whitesmoke;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+#register-container-heading
+{
+    font-family: 'Acme', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+}
+
+#register-container-body{
+    font-family: 'Arvo', serif;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.errorbox{
+    color: red;
+}
