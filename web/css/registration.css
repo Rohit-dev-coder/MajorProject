@@ -3,14 +3,14 @@
 #a3c6c4
 #e0e7e9 */
 
-body{
+body {
     background-image: url("../bgimages/img8.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-#register-container{
+#register-container {
     background-color: #354649;
     margin-top: 20px;
     color: whitesmoke;
@@ -21,19 +21,25 @@ body{
     -o-border-radius: 10px;
 }
 
-#register-container-heading
-{
+#register-container-heading {
     font-family: 'Acme', sans-serif;
     font-size: 2rem;
     text-align: center;
 }
 
-#register-container-body{
+#register-container-body {
     font-family: 'Arvo', serif;
     font-size: 1rem;
     text-align: left;
 }
 
-.errorbox{
-    color: red;
+.errorbox {
+    background-color: rgb(250, 200, 200);
+    border-color: rgb(250, 200, 200);
+    border-width: 2px;
+
+}
+
+.errorbox::placeholder {
+    color: rgb(150, 9, 9);
 }

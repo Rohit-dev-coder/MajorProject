@@ -13,10 +13,14 @@
     <link rel="stylesheet" href="css/registration.css">
     <link href="https://fonts.googleapis.com/css?family=Acme|Arvo&display=swap" rel="stylesheet">
     <script src="jsScripts/register.js"></script>
+    <script src="jsScripts/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 
-<body>   
-    
+<body>
+
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <a class="navbar-brand" href="#">TechQuiz</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -39,8 +43,8 @@
                 </li>
             </ul>
             <div class="btn-group mt-2">
-                <button type="button" class="btn btn-info">LOGIN</button>
-                <button type="button" class="btn btn-outline-info">REGISTER</button>
+                <button type="button" class="btn btn-info" onclick="redirectLogin()">LOGIN</button>
+                <button type="button" class="btn btn-outline-info" onclick="redirectRegistration()">REGISTER</button>
             </div>
 
         </div>
@@ -57,44 +61,48 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="firstname">First Name :</label>
-                            <input type="text" class="form-control" placeholder="" id="firstname">
+                            <input type="text" class="form-control" placeholder="" id="firstname"
+                                onfocus="removeerrormsg(this)">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="firstname">Last Name :</label>
-                            <input type="text" class="form-control" placeholder="" id="secondname">
+                            <input type="text" class="form-control" placeholder="" id="secondname"
+                                onfocus="removeerrormsg(this)">
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-lg-12">
                         <label for="email">Email :</label>
-                        <input type="email" class="form-control" placeholder="Ex. jonh@email.com" id="email">
+                        <input type="email" class="form-control" placeholder="Ex. jonh@email.com" id="email"
+                            onfocus="removeerrormsg(this)">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="mobileno">Mobile No :</label>
-                        <input type="text" class="form-control" maxlength="10" id="mobileno">
+                        <input type="text" class="form-control" maxlength="10" id="mobileno"
+                            onfocus="removeerrormsg(this)">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="gender">Gender :</label>
                         <select name="gender" id="gender" class="form-control">
                             <option value="male" selected>Male</option>
                             <option value="female">Female</option>
-                            <option value="other" >Other</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="password">Password :</label>
-                        <input type="password" class="form-control" id="pwd">
+                        <input type="password" class="form-control" id="pwd" onfocus="removeerrormsg(this)">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="repassword">Re-Password :</label>
-                        <input type="password" class="form-control" id="repwd">
+                        <input type="password" class="form-control" id="repwd" onfocus="removeerrormsg(this)">
                     </div>
                 </div>
                 <div class="form-row">
@@ -103,7 +111,7 @@
                     </div>
                     <div class="col-md-6">
                         <button class="btn btn-lg btn-danger btn-block mt-1" onclick="clearForm()">Clear</button>
-                    </div>  
+                    </div>
                 </div>
                 <br>
             </div>
