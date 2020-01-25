@@ -5,7 +5,6 @@ function removeerrormsg(x) {
     if ($('#' + temp).hasClass("errorbox")) {
         $('#' + temp).removeClass('errorbox');
     }
-    $('#' + temp).attr('placeholder','');
 }
 
 
@@ -18,15 +17,14 @@ function addUser() {
     pwd = $('#pwd').val();
     repwd = $('#repwd').val();
 
-    console.log(fname + " " + sname + " " + email + " " + mobile + " " + gender + " " + pwd + " " + repwd);
+    // console.log(fname + " " + sname + " " + email + " " + mobile + " " + gender + " " + pwd + " " + repwd);
 
     if (validateUser()) {
         if (pwd !== repwd) {
             //swal("Error!","password does not match!","error");
             toastr["error"]("password does not match!", "Error!");
             return;
-        } 
-        else{
+        } else {
             if (checkEmail(email) === false)
                 return;
             var data = {
@@ -47,17 +45,19 @@ function addUser() {
 
 function processresponse(responseText) {
     responseText = responseText.trim();
-    if (responseText === "success"){
+    if (responseText === "success") {
+
+        //swal("success!","Registration successful! you can now login","success");
         toastr["success"]("Registration successful! you can now login", "success!");
         setTimeout(redirectUser, 3000);
-    }
-    else if (responseText === "uap"){    
+    } else if (responseText === "uap") {
+        // swal("Error!","sorry! the user with this Email already present","error");
         toastr["warning"]("sorry! the user with this Email already present", "Error!");
-        $('#email').addClass("errorbox");
-        
-    } 
-    else{
-        toastr["warning"]("Sorry! some error occured", "Error!");
+
+    } else {
+        //  swal("Error!","Registration failed! try again","error");
+        toastr["warning"]("sorry! the user with this Email already present", "Error!")
+
     }
 }
 

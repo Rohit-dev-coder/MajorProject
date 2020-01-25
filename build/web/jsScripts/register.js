@@ -23,6 +23,7 @@ function addUser() {
     if (validateUser()) {
         if (pwd !== repwd) {
             //swal("Error!","password does not match!","error");
+            $('#repwd').addClass("errorbox");
             toastr["error"]("password does not match!", "Error!");
             return;
         } 
