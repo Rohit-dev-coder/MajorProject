@@ -1,0 +1,48 @@
+.mybox1 {
+    text-align: center;
+    padding-top: 100px;
+    height: 595px;
+    background-image: url("../bgimages/img9.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(250, 225, 217);
+}
+
+.mybox2 {
+    text-align: center;
+    background-image: url("../bgimages/img8.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 100px;
+    height: 595px;
+    color: rgb(237, 243, 184);
+    /* background: linear-gradient(rgba(224, 247, 247, 0.527),rgba(80, 204, 226, 0.664)); */
+}
+
+h1{
+    /* font-family: 'Acme', sans-serif; */
+    font-family: 'Arvo', serif;
+}
+.modal-content{
+    /* background: linear-gradient(to right, rgb(9, 8, 10), rgb(71, 5, 5)); */
+    color: black;
+    font-family: 'Acme', sans-serif;
+}
+
+#email, #pwd{
+    color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-width: 3px;
+    border-color: black;
+    font-family: 'Acme',sans-serif;
+    font-size: 25px;
+    letter-spacing: 0.2rem;
+}
+
+.form-control:focus{
+    box-shadow: none;
+}

@@ -12,6 +12,7 @@ public class DBConnection {
         try{
             Class.forName("oracle.jdbc.OracleDriver");
             conn=DriverManager.getConnection("jdbc:oracle:thin:@//LAPTOP-GGNGDNPF:1521/xe","paildb","pail");
+           
             System.out.println("Connection opened");
             }
             catch(Exception e)

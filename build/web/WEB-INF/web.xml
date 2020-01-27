@@ -4,9 +4,17 @@
         <servlet-name>RegistrationControllerServlet</servlet-name>
         <servlet-class>techquiz.controller.RegistrationControllerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginControllerServlet</servlet-name>
+        <servlet-class>techquiz.controller.LoginControllerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationControllerServlet</servlet-name>
         <url-pattern>/RegistrationControllerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginControllerServlet</servlet-name>
+        <url-pattern>/LoginControllerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

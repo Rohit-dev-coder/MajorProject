@@ -10,30 +10,14 @@
     <script src="bootstrapfiles/jquery-3.4.1.js"></script>
     <script src="bootstrapfiles/bootstrap.bundle.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-    <style>
-        .mybox1 {
-            text-align: center;
-            padding-top: 100px;
-            height: 595px;
-            background-image: url("bgimages/img9.jpg");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            color: rgb(250, 225, 217);
-        }
-
-        .mybox2 {
-            text-align: center;
-            background-image: url("bgimages/img8.jpg");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            padding-top: 100px;
-            height: 595px;
-            color: rgb(237, 243, 184);
-            /* background: linear-gradient(rgba(224, 247, 247, 0.527),rgba(80, 204, 226, 0.664)); */
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Acme|Arvo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+    
+    <script src="jsScripts/login.js"></script>
+    <script src="jsScripts/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 
 <body>
@@ -86,20 +70,19 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <h1 style="color: blue; font-family: Georgia, 'Times New Roman', Times, serif">Student
+                                <h1>Student
                                 </h1><br>
                                 <form>
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="username"
-                                            placeholder="UserName"><br>
+                                            placeholder="Your Email" id="email"><br>
                                         <input type="password" class="form-control" name="password"
-                                            placeholder="Password">
+                                            placeholder="Password" id="pwd">
                                     </div>
                                 </form>
-                                <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
-                                <button type="button" class="btn btn-secondary btn-block"
+                                <button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="connectUser()">LOGIN</button>
+                                <button type="button" class="btn btn-secondary btn-block btn-lg"
                                     data-dismiss="modal">Close</button>
-
                             </div>
                         </div>
                     </div>
@@ -115,18 +98,19 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <h1 style="color: blue; font-family: Georgia, 'Times New Roman', Times, serif">TEACHER
+                                <h1>TEACHER
                                 </h1><br>
                                 <form>
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="username"
-                                            placeholder="UserName"><br>
+                                            placeholder="UserName" id="email"><br>
                                         <input type="password" class="form-control" name="password"
-                                            placeholder="Password">
+                                            placeholder="Password" id="pwd">
                                     </div>
                                 </form>
-                                <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
-                                <button type="button" class="btn btn-secondary btn-block"
+                                <br>
+                                <button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="connectUser()">LOGIN</button>
+                                <button type="button" class="btn btn-secondary btn-block btn-lg"
                                     data-dismiss="modal">Close</button>
 
                             </div>
