@@ -8,6 +8,10 @@
         <servlet-name>LoginControllerServlet</servlet-name>
         <servlet-class>techquiz.controller.LoginControllerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminControllerServlet</servlet-name>
+        <servlet-class>techquiz.controller.AdminControllerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationControllerServlet</servlet-name>
         <url-pattern>/RegistrationControllerServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>LoginControllerServlet</servlet-name>
         <url-pattern>/LoginControllerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminControllerServlet</servlet-name>
+        <url-pattern>/AdminControllerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

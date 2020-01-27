@@ -1,59 +1,51 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package techquiz.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import techquiz.dao.UserDAO;
-import techquiz.dto.UserDTO;
+import techquiz.dto.UserDetails;
 
-/**
- *
- * @author hp
- */
-public class LoginControllerServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+public class AdminControllerServlet extends HttpServlet {
+
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         RequestDispatcher rd=null;
-            String username=request.getParameter("username");
-            String password=request.getParameter("password");
-            UserDTO user=new UserDTO(username,password);
-            try{
-                String result=UserDAO.validateUser(user);
-                System.out.println(result);
-                request.setAttribute("result",result);
-                request.setAttribute("username",username);
-                rd=request.getRequestDispatcher("loginresponse.jsp");
-               }
-            catch(SQLException e) {
-            request.setAttribute("exception",e);
-            rd=request.getRequestDispatcher("showexception.jsp");
-            e.printStackTrace();
-                 }
-        finally
-        {
-            rd.forward(request, response);
-        }
-     
+        response.setContentType("text/html;charset=UTF-8");
+        String queryfor = request.getParameter("data");
+        RequestDispatcher rd=null;
+//        HttpSession session=request.getSession();
+        try{
+//            String userid=(String)session.getAttribute("userid");
+//            if(userid==null)
+//            {
+//                session.invalidate();
+//                response.sendRedirect("accessdenied.html");
+//                return;
+//            }
+            if(queryfor.equalsIgnoreCase("View-Students"))
+            {
+                ArrayList<UserDetails> resultdata = UserDAO.getAllUsers("student");
+                request.setAttribute("resultdata", resultdata);
+            }
+            rd=request.getRequestDispatcher("showuserstable.jsp");
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                rd=request.getRequestDispatcher("showexception.jsp");
+            }
+            finally
+            {
+                rd.forward(request, response);
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
