@@ -13,11 +13,14 @@
     <link href="https://fonts.googleapis.com/css?family=Acme|Arvo&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css">
     
-    <script src="jsScripts/login.js"></script>
+    
     <script src="jsScripts/jquery.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    
+    
+    <script src="jsScripts/login.js"></script>
 </head>
 
 <body>
@@ -32,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">HOME</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">ABOUT US</a>
@@ -74,13 +77,13 @@
                                 </h1><br>
                                 <form>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="username"
-                                            placeholder="Your Email" id="email"><br>
+                                        <input type="email" class="form-control" name="username"
+                                            placeholder="Your Email" id="email1"><br>
                                         <input type="password" class="form-control" name="password"
-                                            placeholder="Password" id="pwd">
+                                            placeholder="Password" id="pwd1">
                                     </div>
                                 </form>
-                                <button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="connectUser()">LOGIN</button>
+                                <button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="connectUser(this)" id="stdbtn">LOGIN</button>
                                 <button type="button" class="btn btn-secondary btn-block btn-lg"
                                     data-dismiss="modal">Close</button>
                             </div>
@@ -102,14 +105,14 @@
                                 </h1><br>
                                 <form>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="username"
+                                        <input type="email" class="form-control" name="username"
                                             placeholder="UserName" id="email"><br>
                                         <input type="password" class="form-control" name="password"
                                             placeholder="Password" id="pwd">
                                     </div>
                                 </form>
                                 <br>
-                                <button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="connectUser()">LOGIN</button>
+                                <button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="connectUser(this)" id="tbtn">LOGIN</button>
                                 <button type="button" class="btn btn-secondary btn-block btn-lg"
                                     data-dismiss="modal">Close</button>
 

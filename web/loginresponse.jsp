@@ -8,21 +8,21 @@
 <%
     
     String username=(String)request.getAttribute("username");
-      String result=(String)request.getAttribute("result");
+    String result=(String)request.getAttribute("result");
     
-    if(username!=null&&result!=null)
+    if(username!=null && result!=null)
     {
         HttpSession sess=request.getSession();
         sess.setAttribute("username",username);
         if(result.equalsIgnoreCase("student"))
         {
-         String url="studentdashboard.html;jsessionid="+session.getId();
+         String url="studentdashboard.jsp;jsessionid="+session.getId();
         out.println(url);
         
          }
     else if(result.equalsIgnoreCase("teacher"))  
     {
-      String url="teacherdashboard.html;jsessionid="+session.getId();
+      String url="teacherdashboard.jsp;jsessionid="+session.getId();
       out.println(url);
         
     }

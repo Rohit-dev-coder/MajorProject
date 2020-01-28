@@ -1,20 +1,23 @@
-//
-
-
 var username,password;
-function connectUser()
-{
-    username=$("#email").val();
-    password=$("#pwd").val();
+function connectUser(x)
+{    
+    var str = x.getAttribute("id");
+    if(str === 'stdbtn')
+    {
+        username=$("#email1").val();
+        password=$("#pwd1").val();
+    }
+    else if (str === 'tbtn'){
+        username=$("#email").val();
+        password=$("#pwd").val();
+    }
+            
     if(validate()===false)
     {
-    // swal("Access Denied ","please enter userid/pasword!","error");
-     toastr["warning"]("sorry! please enter userid/pasword!", "Error!");
-     return;
-     
-            
+        toastr["warning"]("sorry! please enter userid/pasword!", "Error!");
+        return ;
     }
-    
+
     var data={
         username:username,
         password:password
@@ -37,8 +40,6 @@ function processresponse(responseText) {
         setTimeout(function(){
            window.location=responseText;
         },3000);
-        
-
     }
    
     else {
@@ -48,8 +49,7 @@ function processresponse(responseText) {
     }
 }
 function validate(){
-    if(username ==="" || password==="") {
-     
+    if(username ==="" || password==="") {   
        // swal("Error!","All fields are mandatory!","error");
        toastr["error"]("All fields are mandatory!", "Error!");
         return false;

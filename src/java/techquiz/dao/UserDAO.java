@@ -20,14 +20,14 @@ import techquiz.dto.UserDetails;
  */
 public class UserDAO {
     
-     private static PreparedStatement ps,ps1;
+     private static PreparedStatement ps,ps1,ps2;
     static{
         
      try{   
           
-         ps=DBConnection.getConnection().prepareStatement("select * from user_details where email=? and pwd=?");
+        ps=DBConnection.getConnection().prepareStatement("select * from user_details where email=? and pwd=?");
         ps1 = DBConnection.getConnection().prepareStatement("Select * from user_details where usertype = ?");
-         
+        ps2 = DBConnection.getConnection().prepareStatement("Select * from user_details where email = ?");
      }
      catch(SQLException ex)
      {
@@ -63,4 +63,23 @@ public class UserDAO {
         return al;
     }
     
+    public static UserDetails getSingleUserDetail(String email) throws SQLException
+    {
+        ps2.setString(1, email);
+        ResultSet rs = ps2.executeQuery();
+        UserDetails obj = new UserDetails();
+        if(!rs.next())
+        {
+            obj = null;
+        }
+        else{
+            obj.setFname(rs.getString(1));
+            obj.setSname(rs.getString(2));
+            obj.setEmail(rs.getString(3));
+            obj.setGender(rs.getString(5));
+            obj.setMobile(rs.getLong(4));
+        }
+        
+        return obj;
+    }
 }

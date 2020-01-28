@@ -29,6 +29,11 @@ public class UserDetails {
         this.pwd = pwd;
     }
 
+    @Override
+    public String toString() {
+        return "UserDetails{" + "fname=" + fname + ", sname=" + sname + ", email=" + email + ", gender=" + gender + ", mobile=" + mobile + ", pwd=" + pwd + '}';
+    }
+
     
     
     

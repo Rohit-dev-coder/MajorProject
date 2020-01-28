@@ -31,7 +31,7 @@ h1{
     font-family: 'Acme', sans-serif;
 }
 
-#email, #pwd{
+#email, #pwd, #email1, #pwd1{
     color: black;
     border-top: none;
     border-left: none;

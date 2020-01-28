@@ -27,7 +27,6 @@
             Exception ex=(Exception)request.getAttribute("exception");
             System.out.println(ex);
             out.println(ex);
-            
-            %>
+        %>
     </body>
 </html>
