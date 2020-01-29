@@ -35,6 +35,12 @@ public class AdminControllerServlet extends HttpServlet {
                 ArrayList<UserDetails> resultdata = UserDAO.getAllUsers("student");
                 request.setAttribute("resultdata", resultdata);
             }
+            else if(queryfor.equalsIgnoreCase("View-teachers"))
+            {
+                ArrayList<UserDetails> resultdata = UserDAO.getAllUsers("teacher");
+                request.setAttribute("resultdata", resultdata);
+            }
+            
             rd=request.getRequestDispatcher("showuserstable.jsp");
             }
             catch(Exception e)

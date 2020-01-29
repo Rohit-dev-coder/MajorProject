@@ -24,12 +24,17 @@
     <link rel="stylesheet" href="bootstrapfiles/bootstrap.min.css">
     <script src="bootstrapfiles/jquery-3.4.1.js"></script>
     <script src="bootstrapfiles/bootstrap.bundle.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Acme|Arvo&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/registration.css">
+    <!--<link rel="stylesheet" href="css/registration.css">-->
 
-
+    
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
 
@@ -72,10 +77,10 @@
 
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <nav class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
+                    <ul class="nav flex-column" >
+                        <li class="nav-item" >
                             <span class="nav-link active" id="Profile" onclick="showContent(this)" >
                                 <span data-feather="home"></span>
                                 Profile
@@ -112,7 +117,7 @@
                             </span>
                         </li>
                     </ul>
-
+                    
 
                 </div>
             </nav>

@@ -47,12 +47,14 @@ function showContent(e)
     let bodyTitle = document.querySelector("h1.h1");
 //    bodyTitle.innerHTML = id;
 
-    let tabLinks = document.querySelector(".sidebar .nav-link.active");
+    var tabb = document.querySelector("ul.nav.flex-column");
+    var tabLinks = tabb.querySelector(".nav-item .nav-link.active");
     tabLinks.classList.remove("active");
 
-    
-    let atabLinks = document.querySelector(".sidebar #"+id);
+//    console.log(id);
+    var atabLinks = document.querySelector("#"+id);
     atabLinks.classList.add("active");
+    
     
     
     var data = {
