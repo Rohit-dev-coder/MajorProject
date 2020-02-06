@@ -3,6 +3,9 @@
 #a3c6c4
 #e0e7e9 */
 
+
+
+
 body {
     font-size: .875rem;
   }
@@ -105,6 +108,9 @@ body {
   .data-result{
     display: contents;
  }
+ .data-result:fullscreen{
+  background-color: white;
+}
  
  .mytablestyle{
      font-family: 'Arvo', serif;
@@ -126,19 +132,62 @@ body {
       font-size: 40px;
       color: #354649;
   }
+  .dashboardsubHeading{
+      font-family: 'Arvo', serif;
+      font-size: 16px;
+      color: #354649;
+      line-height: 2rem;
+  }
   .dashboardContent{
       font-family: 'Arvo', serif;
-      font-size: 20px;
+      font-size: 16px;
       padding: 10px;
-      background-image: none;
   }
-  .dashboardbgimg{
-     
-   
+  .mybgimg{
+      /*background-color: #ccccff;*/
   }
   .resultBox{
       -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
         -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
         box-shadow:         3px 3px 5px 6px #ccc;
-        
+        background-color: white;
   }
+  .resultBox:fullscreen {
+  background-color: white;
+}
+  
+  
+  
+ /*for setexam code*/ 
+  .errorbox {
+    background-color: rgb(250, 200, 200);
+    border-color: rgb(250, 200, 200);
+    border-width: 2px;
+
+}
+
+.errorbox::placeholder {
+    color: rgb(150, 9, 9);
+}
+
+
+
+/* Chrome, Safari and Opera syntax */
+:-webkit-full-screen {
+  background-color: white;
+}
+
+/* Firefox syntax */
+:-moz-full-screen {
+  background-color: white;
+}
+
+/* IE/Edge syntax */
+:-ms-fullscreen {
+  background-color: white;
+}
+
+/* Standard syntax */
+:fullscreen {
+  background-color: white;
+}

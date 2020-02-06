@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import techquiz.dao.UserDAO;
+import techquiz.dto.ExamDTO;
 import techquiz.dto.UserDetails;
 
 public class TeacherControllerServlet extends HttpServlet {
@@ -46,7 +47,8 @@ public class TeacherControllerServlet extends HttpServlet {
                     response.sendRedirect("loginpage.html");
                     return;
                 }
-              
+                
+                    
                 String queryof = (String)request.getParameter("data");
                 System.out.println("Queryfor "+ queryof);
                 if (queryof.equalsIgnoreCase("profile"))
@@ -58,7 +60,18 @@ public class TeacherControllerServlet extends HttpServlet {
                     rd = request.getRequestDispatcher("userdetails.jsp");
                 }
                 else if(queryof.equalsIgnoreCase("Set-exams")){
-                    rd=request.getRequestDispatcher("setexam.jsp");
+                    ExamDTO o = (ExamDTO)session.getAttribute("paperdetails");
+                    if(o==null)
+                    {
+                        rd=request.getRequestDispatcher("setexam.jsp");
+                    }
+                    else{
+                        int i = (int)session.getAttribute("currentQuestionNo");
+                        if(i == o.getTotalQuestion()){
+                            rd = request.getRequestDispatcher("previewquestions.jsp");
+                        }
+                        rd=request.getRequestDispatcher("setquestions.jsp");
+                    }
                 }
                 else if(queryof.equalsIgnoreCase("Exams-request")){
                     rd=request.getRequestDispatcher("examrequest.jsp");

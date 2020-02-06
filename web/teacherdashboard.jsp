@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
     <title>Dashboard</title>
@@ -29,10 +30,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>-->
     
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="css/registration.css">-->
+    <link rel="stylesheet" href="css/myloader.css">
 
     
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
@@ -41,6 +43,8 @@
 
     <!-- myscript -->
     <script src="jsScripts/teacherdashboard.js"></script>
+    <script src="jsScripts/setexam.js"></script>
+    
 
 </head>
 
@@ -121,15 +125,16 @@
 
                 </div>
             </nav>
-
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 mybgimg">
                 <div id = "user-dashboard"
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 ">
                     <!-- dynamically changed title -->
                     <!--<h1 class="h1">Profile</h1>-->
 
-
+                    <div class="loader mx-auto"></div>
                     <div class="data-result">
+                        
                         <!-- body of the title goes here  -->
                     </div>
                 </div>

@@ -7,6 +7,14 @@ window.onload = function() {
     this.onloadmyfunction();
 };
 
+
+$(window).on('beforeunload', function(){
+    return false;
+});
+
+
+ 
+ 
 function onloadmyfunction()
 {
     var x = window.innerWidth;
@@ -21,11 +29,16 @@ function onloadmyfunction()
         side.append(Links);
     }
     
+      let l = Links.querySelector(".active");
+      l.classList.remove("active");
+      var atabLinks = document.querySelector("#Profile");
+      atabLinks.classList.add("active");
+    
     clearDataResult();
     var data = {
         data: "profile"
     };
-    $.post("TeacherControllerServlet", data, processresponse);
+    $.post("TeacherControllerServlet",data,processresponse);
     
 }
 
@@ -41,8 +54,7 @@ function clearDataResult()
 }
 
 function showContent(e)
-{
-   
+{ 
     var id = e.getAttribute("id");
     let bodyTitle = document.querySelector("h1.h1");
 //    bodyTitle.innerHTML = id;
@@ -61,5 +73,17 @@ function showContent(e)
         data:id
     };
     clearDataResult();
-    $.post("TeacherControllerServlet", data, processresponse);    
+    $.post("TeacherControllerServlet",data, processresponse);    
 }
+
+
+
+//loader js Required
+$('.loader').hide();
+$(document)
+  .ajaxStart(function () {
+    $('.loader').show();
+  })
+  .ajaxStop(function () {
+    $('.loader').hide();
+  });

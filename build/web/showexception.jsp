@@ -16,17 +16,17 @@
     <body>
         <br>
         <div class="candidate">
-            Tech_Quiz Application......
+            <p>Tech_Quiz Application......</p>
         </div>
         <br>
         <div class="subcandidate">
-            Please Try Again later
+            <p>Please Try Again later</p>
         </div>
         
         <%
             Exception ex=(Exception)request.getAttribute("exception");
             System.out.println(ex);
-            out.println(ex);
+            out.println("<p>"+ex+"</p>");
         %>
     </body>
 </html>

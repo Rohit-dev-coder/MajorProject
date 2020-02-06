@@ -1,8 +1,4 @@
-<%-- 
-    Document   : loginresponse
-    Created on : 26 Jan, 2020, 9:18:11 PM
-    Author     : hp
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -24,7 +20,6 @@
     {
       String url="teacherdashboard.jsp;jsessionid="+session.getId();
       out.println(url);
-        
     }
     }
     else

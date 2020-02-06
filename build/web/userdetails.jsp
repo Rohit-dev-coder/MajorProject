@@ -47,7 +47,7 @@
                     <b>Name : </b><%= obj.getFname()%> <%= obj.getSname() %><br>
                     <b>Email : </b><%= obj.getEmail() %><br>
                     <b>Gender : </b><%= obj.getGender() %><br>
-                    <b>Mobile_No: </b><%= obj.getMobile() %><br>
+                    <b>Mobile_No: </b>+91 <%= obj.getMobile() %><br>
                 </div>
             </div>
             

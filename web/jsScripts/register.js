@@ -120,12 +120,12 @@ function clearForm() {
     $('#gender').selectedIndex = 0;
     $('#pwd').val('');
     $('#repwd').val('');
-    // document.getElementById("firstname").placeholder = '';
-    // document.getElementById("secondname").placeholder = '';
-    // document.getElementById("pwd").placeholder = '';
-    // document.getElementById("repwd").placeholder = '';
-    // document.getElementById("mobileno").placeholder = '';
-    // document.getElementById("email").placeholder = "Ex. jonh@email.com";
+     document.getElementById("firstname").placeholder = '';
+     document.getElementById("secondname").placeholder = '';
+     document.getElementById("pwd").placeholder = '';
+     document.getElementById("repwd").placeholder = '';
+     document.getElementById("mobileno").placeholder = '';
+     document.getElementById("email").placeholder = "Ex. jonh@email.com";
 
 }
 

@@ -20,6 +20,10 @@
         <servlet-name>TeacherControllerServlet</servlet-name>
         <servlet-class>techquiz.controller.TeacherControllerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SetQuestionsControllerServlet</servlet-name>
+        <servlet-class>techquiz.controller.SetQuestionsControllerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationControllerServlet</servlet-name>
         <url-pattern>/RegistrationControllerServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>TeacherControllerServlet</servlet-name>
         <url-pattern>/TeacherControllerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetQuestionsControllerServlet</servlet-name>
+        <url-pattern>/SetQuestionsControllerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
