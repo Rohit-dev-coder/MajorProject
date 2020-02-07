@@ -51,32 +51,40 @@ public class SetQuestionsControllerServlet extends HttpServlet {
         
         
         try{
-            String username=(String)session.getAttribute("username");
-            if(username == null)
+            
+            String userid = (String)session.getAttribute("username");
+            String usertype=(String)session.getAttribute("usertype");
+            if(userid == null || usertype == null)
             {
                 session.invalidate();
-                response.sendRedirect("loginpage.html");
+                response.sendRedirect("accessdenied.html");
                 return;
             }
-            
-              
-            String code = (String)request.getParameter("code");
-            if(code.equalsIgnoreCase("paperdetails")){   
-                String examtitle =  (String)request.getParameter("examtitle");
-                String examdate = (String)request.getParameter("examdate");                
-                String examtime = (String)request.getParameter("examtime");
-                String fulldatetime = examdate+" "+examtime+":00";
+    
+            if(usertype.equalsIgnoreCase("student")){
+                session.invalidate();
+                response.sendRedirect("accessdenied.html");
+                return;
+            }
+            else if(usertype.equalsIgnoreCase("teacher"))
+            {
+                String code = (String)request.getParameter("code");
+                if(code.equalsIgnoreCase("paperdetails")){   
+                    String examtitle =  (String)request.getParameter("examtitle");
+                    String examdate = (String)request.getParameter("examdate");                
+                    String examtime = (String)request.getParameter("examtime");
+                    String fulldatetime = examdate+" "+examtime+":00";
 //                System.out.println(fulldatetime);
-                int tquestion = Integer.parseInt(request.getParameter("tquestion"));
-                int tmarks = Integer.parseInt(request.getParameter("tmarks"));
+                    int tquestion = Integer.parseInt(request.getParameter("tquestion"));
+                    int tmarks = Integer.parseInt(request.getParameter("tmarks"));
 //                String examid = ExamDAO.getExamID();
-                obj = new ExamDTO();
-                obj.setEmail(username);
+                    obj = new ExamDTO();
+                    obj.setEmail(userid);
 //                obj.setExamId(examid);
-                obj.setExamTitle(examtitle);
-                obj.setTotalMarks(tmarks);
-                obj.setTotalQuestion(tquestion);
-                obj.setExamDateTime(fulldatetime);  
+                    obj.setExamTitle(examtitle);
+                    obj.setTotalMarks(tmarks);
+                    obj.setTotalQuestion(tquestion);
+                    obj.setExamDateTime(fulldatetime);  
                 session.setAttribute("paperdetails", obj);
                 session.setAttribute("currentQuestionNo", 1);
                 session.setAttribute("allquestion", allQuestion);
@@ -240,6 +248,9 @@ public class SetQuestionsControllerServlet extends HttpServlet {
                 rd=request.getRequestDispatcher("responses.jsp");
                                
             }
+                
+            }
+            
         }
         catch(Exception e)
         {

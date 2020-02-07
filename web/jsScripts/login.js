@@ -6,10 +6,12 @@ function connectUser(x)
     {
         username=$("#email1").val();
         password=$("#pwd1").val();
+        type = 'student';
     }
     else if (str === 'tbtn'){
         username=$("#email").val();
         password=$("#pwd").val();
+        type = 'teacher';
     }
             
     if(validate()===false)
@@ -20,7 +22,8 @@ function connectUser(x)
 
     var data={
         username:username,
-        password:password
+        password:password,
+        type: type
         
     };
     $.post("LoginControllerServlet",data,processresponse);

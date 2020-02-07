@@ -1,10 +1,17 @@
 <%
     String userid = (String)session.getAttribute("username");
-    if(userid == null)
+    String usertype=(String)session.getAttribute("usertype");
+    if(userid == null || usertype == null)
     {
         session.invalidate();
 	response.sendRedirect("accessdenied.html");
 	return;
+    }
+    
+    if(usertype.equalsIgnoreCase("student")){
+        session.invalidate();
+        response.sendRedirect("accessdenied.html");
+        return;
     }
 %>
 

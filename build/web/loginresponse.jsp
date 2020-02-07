@@ -4,26 +4,28 @@
 <%
     
     String username=(String)request.getAttribute("username");
-    String result=(String)request.getAttribute("result");
-    
-    if(username!=null && result!=null)
+    boolean result=(boolean)request.getAttribute("result");
+    String utype = (String)request.getAttribute("utype");
+    System.out.println("lr "+utype+result);
+    if(username!=null && utype!=null && result == true)
     {
         HttpSession sess=request.getSession();
         sess.setAttribute("username",username);
-        if(result.equalsIgnoreCase("student"))
+        sess.setAttribute("usertype",utype);
+        if(utype.equalsIgnoreCase("student"))
         {
-         String url="studentdashboard.jsp;jsessionid="+session.getId();
-        out.println(url);
-        
-         }
-    else if(result.equalsIgnoreCase("teacher"))  
-    {
-      String url="teacherdashboard.jsp;jsessionid="+session.getId();
-      out.println(url);
-    }
+            String url="studentdashboard.jsp;jsessionid="+session.getId();
+            out.println(url);
+        }
+        else if(utype.equalsIgnoreCase("teacher"))  
+        {
+            String url="teacherdashboard.jsp;jsessionid="+session.getId();
+            out.println(url);
+        }
     }
     else
     {
+        
         out.println("error");
     }
     %>

@@ -5,17 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import techquiz.dbutil.DBConnection;
 import techquiz.dto.ExamDTO;
 
 public class ExamDAO {
     private static Statement st;
-    private static PreparedStatement ps;
+    private static PreparedStatement ps,ps1;
     
     static{
         try{   
             st = DBConnection.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE); //for getting new examid every time
             ps = DBConnection.getConnection().prepareStatement("insert into exam values (?,?,to_timestamp(?,'YYYY-MM-DD HH24:MI:SS'),?,?,?)");
+            ps1 = DBConnection.getConnection().prepareStatement("select * from exam where email = ?");
         }
         catch(SQLException ex)
         {
@@ -46,5 +48,22 @@ public class ExamDAO {
         return (ps.executeUpdate() != 0);
     }
     
+    public static ArrayList<ExamDTO> getAllExamByEmail(String email)throws SQLException{
+        ps1.setString(1, email);
+        ResultSet rs = ps1.executeQuery();
+        ArrayList<ExamDTO> al = new ArrayList<>();
+        while(rs.next())
+        {
+            ExamDTO obj = new ExamDTO();
+            obj.setExamId(rs.getString(1));
+            obj.setExamTitle(rs.getString(2));
+            obj.setExamDateTime(rs.getTimestamp(3).toString());
+            obj.setTotalQuestion(rs.getInt(4));
+            obj.setTotalMarks(rs.getInt(5));
+            obj.setEmail(email);
+            al.add(obj);
+        }
+        return al;
+    }
     
 }

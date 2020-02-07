@@ -38,7 +38,7 @@ function processresponseforsetexam(responseText) {
     clearDataResult();
     console.log(responseText);
     if(responseText === "saveexam"){
-        toastr["info"]("Save Paper Successfully", "SAVED!");
+        toastr["info"]("Save Successfully", "SAVED!");
         setTimeout(onloadmyfunction,3000);
     }
     else{

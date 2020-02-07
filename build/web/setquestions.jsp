@@ -5,13 +5,19 @@
 <%
 //   response.setHeader( "Pragma", "no-cache" );
 //   response.setHeader( "Cache-Control", "no-cache" );
-   response.setDateHeader("Expires", -1 );
+    response.setDateHeader("Expires", -1 );
     String userid = (String)session.getAttribute("username");
-    if(userid == null)
+    String usertype=(String)session.getAttribute("usertype");
+    if(userid == null || usertype == null)
     {
         session.invalidate();
 	response.sendRedirect("accessdenied.html");
 	return;
+    }
+    if(usertype.equalsIgnoreCase("student")){
+        session.invalidate();
+        response.sendRedirect("accessdenied.html");
+        return;
     }
     ExamDTO obj = (ExamDTO)session.getAttribute("paperdetails");
     if(obj == null)
@@ -57,7 +63,7 @@
                 </div>
                 <div class="row mx-auto">
                     <div class="col-12">
-                        <i>(NOTE: Each question carry equal marks i.e totalquestion/totalmarks = one question marks)</i>
+                        <i>(NOTE: Each question carry equal marks i.e totalmarks/totalquestion = one question marks)</i>
                     </div>
                 </div>
                 
@@ -179,8 +185,6 @@
         fups = $(".onewordanscol").hide();
         tf = $(".tfanscol").hide();
         
-        $(window).on('beforeunload', function(){
-            return false;
-        });
+       
     </script>
 </div>

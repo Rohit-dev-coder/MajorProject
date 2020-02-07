@@ -1,15 +1,22 @@
 <!doctype html>
 <html lang="en">
 <%
-        response.setDateHeader("Expires", 0);
+        response.setDateHeader("Expires", -1);
         String userid = (String)session.getAttribute("username");
-        if(userid == null)
+        String usertype=(String)session.getAttribute("usertype");
+        if(userid == null || usertype == null)
         {
             session.invalidate();
             response.sendRedirect("accessdenied.html");
             return;
         }
-    %>
+    
+        if(usertype.equalsIgnoreCase("student")){
+            session.invalidate();
+            response.sendRedirect("accessdenied.html");
+            return;
+        }
+%>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,8 +26,6 @@
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
     <title>Dashboard</title>
-
-
 
     <link rel="stylesheet" href="bootstrapfiles/bootstrap.min.css">
     <script src="bootstrapfiles/jquery-3.4.1.js"></script>
@@ -97,11 +102,12 @@
                             </span>
                         </li>
                         <li class="nav-item">
-                            <span class="nav-link" id="Exams-Request" onclick="showContent(this)">
+                            <span class="nav-link" id="Exams-details" onclick="showContent(this)">
                                 <span data-feather="check-square"></span>
-                                Exams Request
+                                Exams Detail
                             </span>
                         </li>
+                        
                         <li class="nav-item">
                             <span class="nav-link" id="Declared-Result" onclick="showContent(this)">
                                 <span data-feather="users"></span>

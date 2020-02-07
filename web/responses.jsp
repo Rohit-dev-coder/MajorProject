@@ -2,12 +2,18 @@
 <%
     response.setDateHeader("Expires", -1 );
     String username=(String)session.getAttribute("username");
-    if(username == null)
+    String usertype=(String)session.getAttribute("usertype");
+    if(username == null || usertype == null)
     {
         session.invalidate();
         response.sendRedirect("loginpage.html");
         return;
     }
+    if(usertype.equalsIgnoreCase("student")){
+            session.invalidate();
+            response.sendRedirect("accessdenied.html");
+            return;
+        }
     String status = (String)session.getAttribute("status");
     if(status != null)
     {

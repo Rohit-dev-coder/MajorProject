@@ -10,11 +10,17 @@
    response.setDateHeader("Expires", -1 );
     
     String userid = (String)session.getAttribute("username");
-    if(userid == null)
+    String usertype=(String)session.getAttribute("usertype");
+    if(userid == null || usertype == null)
     {
         session.invalidate();
 	response.sendRedirect("accessdenied.html");
 	return;
+    }
+    if(usertype.equalsIgnoreCase("student")){
+        session.invalidate();
+        response.sendRedirect("accessdenied.html");
+        return;
     }
     ExamDTO obj = (ExamDTO)session.getAttribute("paperdetails");
     if(obj == null)
@@ -57,7 +63,7 @@
                 </div>
                 <div class="row mx-auto">
                     <div class="col-12">
-                        <p><i>NOTE:<br> 1. Each question carry equal marks i.e totalquestion/totalmarks = one question marks</i><br>
+                        <p><i>NOTE:<br> 1. Each question carry equal marks i.e total_marks / total_question = one question marks</i><br>
                         <i>2. If you want to change anything in this paper please go to edit paper section and select which paper you want to edit.</i></p>
                     </div>
                 </div>                

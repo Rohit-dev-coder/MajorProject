@@ -25,7 +25,7 @@ public class UserDAO {
         
      try{   
           
-        ps=DBConnection.getConnection().prepareStatement("select * from user_details where email=? and pwd=?");
+        ps=DBConnection.getConnection().prepareStatement("select * from user_details where email=? and pwd=? and usertype=?");
         ps1 = DBConnection.getConnection().prepareStatement("Select * from user_details where usertype = ?");
         ps2 = DBConnection.getConnection().prepareStatement("Select * from user_details where email = ?");
      }
@@ -36,15 +36,12 @@ public class UserDAO {
          ex.printStackTrace();
     }
 }
-    public static String validateUser(UserDTO user)throws SQLException{        
+    public static boolean validateUser(UserDTO user)throws SQLException{        
      ps.setString(1,user.getUsername());
      ps.setString(2,user.getPassword());
+     ps.setString(3, user.getType());
      ResultSet rs=ps.executeQuery();
-     if(rs.next()){
-     return rs.getString(7);
-    }
-     else
-         return null;        
+     return rs.next();         
     }
     
     public static ArrayList<UserDetails> getAllUsers(String type) throws SQLException{

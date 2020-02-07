@@ -21,27 +21,31 @@ public class LoginControllerServlet extends HttpServlet {
   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         RequestDispatcher rd=null;
-            String username=request.getParameter("username");
-            String password=request.getParameter("password");
-            UserDTO user=new UserDTO(username,password);
-            try{
-                String result=UserDAO.validateUser(user);
-                System.out.println(result);
-                request.setAttribute("result",result);
-                request.setAttribute("username",username);
-                rd=request.getRequestDispatcher("loginresponse.jsp");
-               }
-            catch(SQLException e) {
+        RequestDispatcher rd=null;
+        String username=request.getParameter("username");
+        String password=request.getParameter("password");
+        String utype = request.getParameter("type");
+        
+        UserDTO user=new UserDTO(username,password,utype);
+        System.out.println(user);
+        try{
+            boolean result = UserDAO.validateUser(user);
+            System.out.println(result);
+            request.setAttribute("result",result);
+            request.setAttribute("utype", utype);
+            request.setAttribute("username",username);
+            System.out.println("Redirencting");
+            rd=request.getRequestDispatcher("loginresponse.jsp");
+        }
+        catch(SQLException e) {
             request.setAttribute("exception",e);
             rd=request.getRequestDispatcher("showexception.jsp");
             e.printStackTrace();
-                 }
+        }
         finally
         {
             rd.forward(request, response);
         }
-     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
