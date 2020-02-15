@@ -180,9 +180,10 @@ function saveexam(){
     data = {
         code: "saveexam"
     }
-    $.post("SetQuestionsControllerServlet", data, processresponseforsetexam);
-    
+    $.post("SetQuestionsControllerServlet", data, processresponseforsetexam);    
 }
+
+
 
 function validatequestion(){
     var result = true;

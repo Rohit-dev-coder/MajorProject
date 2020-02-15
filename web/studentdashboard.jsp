@@ -3,12 +3,20 @@
     <%
         response.setDateHeader("Expires", 0);
         String userid = (String)session.getAttribute("username");
-        if(userid == null)
+        String utype = (String)session.getAttribute("usertype");
+        if(userid == null || utype == null)
         {
+            
             session.invalidate();
             response.sendRedirect("accessdenied.html");
             return;
         }
+        if(utype.equalsIgnoreCase("teacher")){
+            session.invalidate();
+            response.sendRedirect("accessdenied.html");
+            return;
+        }
+        else if(utype.equalsIgnoreCase("student")){
     %>
 <head>
     <meta charset="utf-8">
@@ -17,26 +25,31 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Dashboard</title>
+    <title>Dashboard <%=userid %></title>
 
 
 
     <link rel="stylesheet" href="bootstrapfiles/bootstrap.min.css">
     <script src="bootstrapfiles/jquery-3.4.1.js"></script>
     <script src="bootstrapfiles/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Acme|Arvo&display=swap" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/myloader.css">
     
-    <link rel="stylesheet" href="css/registration.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>-->
+    
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
 
 
     <!-- myscript -->
-    <script src="jsScripts/dashboard.js"></script>
+    <script src="jsScripts/studentdashboard.js"></script>
 
 </head>
 
@@ -90,9 +103,9 @@
                             </span>
                         </li>
                         <li class="nav-item">
-                            <span class="nav-link" id="Result" onclick="showContent(this)">
+                            <span class="nav-link" id="ResultList" onclick="showContent(this)">
                                 <span data-feather="check-square"></span>
-                                Result
+                                ResultList
                             </span>
                         </li>
                         <li class="nav-item">
@@ -118,7 +131,7 @@
                      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
                     <!-- dynamically changed title -->
                     <!--<h1 class="h1">Profile</h1>-->
-
+                    <div class="loader mx-auto"></div>
                     <div class="data-result">
                         <!-- body of the title goes here  -->
                     </div>
@@ -144,3 +157,7 @@
 </body>
 
 </html>
+
+<% 
+}
+%>

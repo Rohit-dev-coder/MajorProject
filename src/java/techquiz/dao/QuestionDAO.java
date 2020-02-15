@@ -9,16 +9,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import techquiz.dbutil.DBConnection;
 import techquiz.dto.QuestionDTO;
 
 public class QuestionDAO {
     private static Statement st;
-    private static PreparedStatement ps;
+    private static PreparedStatement ps,ps1,ps2;
     static{
         try{   
             st = DBConnection.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
             ps = DBConnection.getConnection().prepareStatement("insert into questions values (?,?,?,?)");
+            ps1 = DBConnection.getConnection().prepareStatement("select * from questions where examid = ?");
+            ps2 = DBConnection.getConnection().prepareStatement("select qtype from questions where qid = ?");
         }
         catch(SQLException ex)
         {
@@ -44,4 +47,27 @@ public class QuestionDAO {
         ps.setString(4, qobj.getQuestion());
         return (ps.executeUpdate()!=0);
     }
+    
+    public static ArrayList<QuestionDTO> getAllQuestionByExamid(String examid)throws SQLException{
+        ps1.setString(1, examid);
+        ResultSet rs = ps1.executeQuery();
+        ArrayList<QuestionDTO> al = new ArrayList<>();
+        while(rs.next()){
+            QuestionDTO o = new QuestionDTO();
+            o.setExamId(examid);
+            o.setQid(rs.getString("qid"));
+            o.setQuestion(rs.getString("question"));
+            o.setqType(rs.getString("qtype"));
+            al.add(o);
+        }
+        return al;
+    }
+    
+    public static String getQuestionType(String qid)throws SQLException{
+        ps2.setString(1, qid);
+        ResultSet rs = ps2.executeQuery();
+        rs.next();
+        return rs.getString(1);
+    }
+    
 }

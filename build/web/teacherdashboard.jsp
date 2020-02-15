@@ -16,6 +16,7 @@
             response.sendRedirect("accessdenied.html");
             return;
         }
+        else if(usertype.equalsIgnoreCase("teacher")){
 %>
 <head>
     <meta charset="utf-8">
@@ -25,7 +26,7 @@
     
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Dashboard</title>
+    <title>Dashboard <%=userid %></title>
 
     <link rel="stylesheet" href="bootstrapfiles/bootstrap.min.css">
     <script src="bootstrapfiles/jquery-3.4.1.js"></script>
@@ -165,3 +166,5 @@
 </body>
 
 </html>
+<% }
+%>

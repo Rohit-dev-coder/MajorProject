@@ -34,7 +34,6 @@ public class LoginControllerServlet extends HttpServlet {
             request.setAttribute("result",result);
             request.setAttribute("utype", utype);
             request.setAttribute("username",username);
-            System.out.println("Redirencting");
             rd=request.getRequestDispatcher("loginresponse.jsp");
         }
         catch(SQLException e) {

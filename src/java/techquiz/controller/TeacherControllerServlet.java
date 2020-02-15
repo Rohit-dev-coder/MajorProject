@@ -23,7 +23,7 @@ public class TeacherControllerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setDateHeader("Expires", 0);
+        response.setDateHeader("Expires", -1);
 //        System.out.println("Teacher controller");
         RequestDispatcher rd=null;
         HttpSession session=request.getSession();

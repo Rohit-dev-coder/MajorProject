@@ -21,7 +21,6 @@
     }
     if(result.equals("studentdetails"))
     {
-        
         obj = (UserDetails)request.getAttribute("data");   
     }
     else if(result.equals("error"))

@@ -1,4 +1,6 @@
 var username,password;
+
+
 function connectUser(x)
 {    
     var str = x.getAttribute("id");
@@ -20,11 +22,16 @@ function connectUser(x)
         return ;
     }
 
+    var tempck =  navigator.cookieEnabled;
+    if(tempck === false){
+        toastr["warning"]("Please Enable Cookies", "Error!");
+        return;
+    }
+    
     var data={
         username:username,
         password:password,
         type: type
-        
     };
     $.post("LoginControllerServlet",data,processresponse);
     
