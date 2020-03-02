@@ -3,15 +3,20 @@ package techquiz.dto;
 
 
 public class EnrollDTO {
-    String examid;
-    String email;
-    String status;
+    private String examid;
+    private String email;
+    private String status;
 
     public EnrollDTO(String examid, String email, String status) {
         this.examid = examid;
         this.email = email;
         this.status = status;
     }
+
+    public EnrollDTO() {
+    }
+    
+    
 
     @Override
     public String toString() {

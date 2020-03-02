@@ -22,10 +22,19 @@
 
 <div class="container-fluid dashboardbgimg">
     <div class="col-md-10 mx-auto">
-        <div class="resultBox">
+        <div class="resultBox fs" style="overflow: scroll">
             <div class="dashboardHeading">
                 <center>PAPER</center>
-            </div>    
+            </div>
+            <p id="timer" style="background-color: yellow;
+               display: inline;
+               padding: 10px;
+               font-size: 40px;
+               color:red;
+               border-radius: 35px;
+               position: fixed;
+               right: 20px;
+               top: 60px;">Start</p>
             <br>
             <form id="questionpaperform">
                 <div class="dashboardContent">
@@ -38,7 +47,7 @@
                     <hr>
 
                     <div class="form-row">
-                        <div class="col-md-12 mx-auto">
+                        <div class="col-lg-8 mx-auto">
                             <div class="form-group">
                                 <label for="question"><b>Question NO:<%=i%></b> <%=obj.getQuestion()%></label>
                             </div>
@@ -49,7 +58,7 @@
                                 if (mcqobj.getQid().equalsIgnoreCase(obj.getQid())) {
                     %>
                     <div class="form-row">
-                        <div class="col-md-12 mx-auto">
+                        <div class="col-lg-8 mx-auto">
                             <div class="form-group">
                                 <div class="radio">
                                     <label><input name="<%=obj.getQid()%>" type="radio" id="<%=obj.getQid()%>" value="<%=mcqobj.getOption1()%>"><%=mcqobj.getOption1()%> </label>
@@ -71,7 +80,7 @@
                     <% } else if (type.equalsIgnoreCase("fups")) {
                     %>
                     <div class="form-row">
-                        <div class="col-md-12 mx-auto">
+                        <div class="col-lg-8 mx-auto">
                             <div class="form-group">
                                 <label for="Answer">Answer</label>
                                 <input type="text" class="form-control" id="<%=obj.getQid()%>">
@@ -83,7 +92,7 @@
                     } else if (type.equalsIgnoreCase("tf")) {
                     %>
                     <div class="form-group">
-                        <div class="col-md-12 mx-auto">
+                        <div class="col-lg-8 mx-auto">
                             <label for="correctanstf">Answer</label>
                             <select id="<%=obj.getQid()%>" name="tf">
                                 <option disabled="true" selected="true">select</option>
@@ -98,19 +107,19 @@
                         }%>
 
                     <div class="row">
-                        
-                        <div class="col-md-4 mx-auto">
+
+                        <div class="col-lg-4 mx-auto">
                             <button class="btn btn-success btn-block" onclick="saveexam()">SUBMIT</button>
                         </div>
                     </div>
-<!--                    <div class="row">
-                        <div class="col-md-4 mx-auto examstatus">
-
-                        </div>
-                        <div class="col-md-4 mx-auto">
-
-                        </div>
-                    </div>        -->
+                    <!--                    <div class="row">
+                                            <div class="col-md-4 mx-auto examstatus">
+                    
+                                            </div>
+                                            <div class="col-md-4 mx-auto">
+                    
+                                            </div>
+                                        </div>        -->
                 </div>
             </form>
         </div>        
@@ -149,6 +158,47 @@
             }
             $.post("TakeTestControllerServlet", data, processresponse);
         }
+
+
+        var temp = <%= request.getAttribute("min")%>;
+        <%
+            String x = (String) request.getAttribute("min");
+            if (x == null) {
+                session.invalidate();
+                response.sendRedirect("accessdenied.html");
+                return;
+            }
+        %>
+        var quizTime = temp * 60 * 1000;
+        var interval = setInterval(function () {
+            //After 1 second we'll subtract i.e. quizTime-curTime
+            quizTime = quizTime - 1000; //Subtract 1s each time
+            //Convert it to H:M:S
+            var hours = Math.floor(quizTime / (1000 * 60 * 60));
+            var minutes = Math.floor((quizTime % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((quizTime % (1000 * 60)) / 1000);
+            var timer = document.querySelector("#timer");
+            timer.innerHTML = hours + ":" + minutes + ":" + seconds;
+            if (quizTime === 0) { 	//Time got out
+                clearInterval(interval);
+                timer.innerHTML = "Timeout";
+                elemfs = null;
+                saveexam();
+            }
+        }, 1000);
+
+
+        elemfs = document.querySelector(".resultBox.fs");
+        if (elemfs.requestFullscreen) {
+            elemfs.requestFullscreen();
+        } else if (elemfs.mozRequestFullScreen) { /* Firefox */
+            elem.mozRequestFullScreen();
+        } else if (elemfs.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+            elemfs.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+            elemfs.msRequestFullscreen();
+        }
+
 
     </script>
 

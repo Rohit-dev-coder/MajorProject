@@ -1,8 +1,11 @@
 // default
 
-
+var elemfs= null;
 window.onresize = function () {
-    this.onloadmyfunction();
+    if(elemfs === null){
+        this.onloadmyfunction();
+    }
+    
 };
 window.onload = function () {
     this.onloadmyfunction();

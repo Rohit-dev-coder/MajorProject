@@ -51,7 +51,10 @@ function processresponse(responseText) {
            window.location=responseText;
         },3000);
     }
-   
+    else if(responseText === "browsererror"){
+        toastr["info"]("Some problem occured please try again later!", "Info!");
+        window.location = "browsererror.html";
+    }
     else {
         //swal("AcessDenied","Some problem occured please try again later","error");
           toastr["error"]("Some problem occured please try again later!", "Error!");

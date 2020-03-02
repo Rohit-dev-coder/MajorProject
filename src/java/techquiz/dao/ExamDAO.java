@@ -9,24 +9,33 @@ import java.util.ArrayList;
 import techquiz.dbutil.DBConnection;
 import techquiz.dto.EnrollDTO;
 import techquiz.dto.ExamDTO;
+import techquiz.dto.examsampleinfo;
 import techquiz.dto.stdexamdetails;
 import techquiz.dto.testdetail;
 
 public class ExamDAO {
     private static Statement st;
-    private static PreparedStatement ps,ps1,ps2,ps3,ps4,ps5,ps6,ps7;
+    private static PreparedStatement ps,ps1,ps2,ps3,ps4,ps5,ps6,ps7,ps8,ps9,ps10,ps11,ps12,ps13,ps14,ps15;
     
     static{
         try{   
             st = DBConnection.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE); //for getting new examid every time
-            ps = DBConnection.getConnection().prepareStatement("insert into exam values (?,?,to_timestamp(?,'YYYY-MM-DD HH24:MI:SS'),?,?,?)");
+            ps = DBConnection.getConnection().prepareStatement("insert into exam values (?,?,to_timestamp(?,'YYYY-MM-DD HH24:MI:SS'),?,?,?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select * from exam where email = ?");
             ps2 = DBConnection.getConnection().prepareStatement("select * from exam");
             ps3 = DBConnection.getConnection().prepareStatement("insert into enrolltable values(?,?,?)");
             ps4 = DBConnection.getConnection().prepareStatement("select status from enrolltable where examid = ? and email = ?");
             ps5 = DBConnection.getConnection().prepareStatement("select * from exam where examid = ?");
             ps6 = DBConnection.getConnection().prepareStatement("update enrolltable set status = 'R' where email = ? and examid = ?");
-            ps7 = DBConnection.getConnection().prepareStatement("select email from enrolltable where examid = ?");
+            ps7 = DBConnection.getConnection().prepareStatement("select email,status from enrolltable where examid = ?");
+            ps8 = DBConnection.getConnection().prepareStatement("update exam set status = 'S' where examid = ?");
+            ps9 = DBConnection.getConnection().prepareStatement("update exam set status = 'NS' where examid = ?");
+            ps10 = DBConnection.getConnection().prepareStatement("insert into activeexam values(?,?)");
+            ps11 = DBConnection.getConnection().prepareStatement("delete from activeexam where examid = ?");
+            ps12 = DBConnection.getConnection().prepareStatement("select min from activeexam where examid = ?");
+            ps13 = DBConnection.getConnection().prepareStatement("update exam set status = 'R' where examid = ?");
+            ps14 = DBConnection.getConnection().prepareStatement("delete from enrolltable where examid = ?");
+            ps15 = DBConnection.getConnection().prepareStatement("select examid,examtitle from exam where status = 'R'");
         }
         catch(SQLException ex)
         {
@@ -34,7 +43,63 @@ public class ExamDAO {
         }
     }
     
+    public static ArrayList<examsampleinfo> getAllDeclaredExamDetails()throws SQLException{
+        ResultSet rs = ps15.executeQuery();
+        ArrayList<examsampleinfo> al = new ArrayList<>();
+        while(rs.next())
+        {
+            examsampleinfo obj = new examsampleinfo();
+            obj.setExamid(rs.getString(1));
+            obj.setExamtitle(rs.getString(2));
+            
+            al.add(obj);
+        }
+        return al;         
+    }
     
+    public static boolean deletestdfromenroll(String eid) throws SQLException{
+        ps14.setString(1, eid);
+        return ps14.executeUpdate()!=0;
+    }
+    
+    public static boolean declaredRank(String eid)throws SQLException{
+        ps13.setString(1,eid);
+        return ps13.executeUpdate()!=0;
+    }
+    
+    public static String getexamminutes(String eid)throws SQLException{
+        ps12.setString(1, eid);
+        ResultSet rs = ps12.executeQuery();
+        rs.next();
+        return rs.getString(1);
+    }
+    
+    public static boolean startexam(String eid,String min)throws SQLException{
+        ps8.setString(1,eid);
+        ps10.setString(1, eid);
+        ps10.setString(2, min);
+        boolean result = false;
+        if(ps8.executeUpdate()!=0){
+            result = true;
+        }
+        if(ps10.executeUpdate()!=0){
+            result = true;
+        }
+        return result;
+    }
+    
+    public static boolean endexam(String eid)throws SQLException{
+        ps9.setString(1,eid);
+        ps11.setString(1, eid);
+        boolean result = false;
+        if(ps9.executeUpdate()!=0){
+            result = true;
+        }
+        if(ps11.executeUpdate()!=0){
+            result = true;
+        }
+        return result;
+    }
     
 //    return examid like ex1,ex2...exn; range(ex1 to ex999)
     public static String getExamID()throws SQLException{
@@ -54,6 +119,7 @@ public class ExamDAO {
         ps.setInt(4, ob.getTotalQuestion());
         ps.setInt(5, ob.getTotalMarks());
         ps.setString(6, ob.getEmail());
+        ps.setString(7, "NS");
         return (ps.executeUpdate() != 0);
     }
     
@@ -70,6 +136,7 @@ public class ExamDAO {
             obj.setTotalQuestion(rs.getInt(4));
             obj.setTotalMarks(rs.getInt(5));
             obj.setEmail(email);
+            obj.setStatus(rs.getString(7));
             al.add(obj);
         }
         return al;
@@ -84,6 +151,7 @@ public class ExamDAO {
             obj.setExamId(rs.getString(1));
             obj.setExamTitle(rs.getString(2));
             obj.setExamDateTime(rs.getTimestamp(3).toString());
+            obj.setExamstatus(rs.getString("status"));
             al.add(obj);
         }
         return al;
@@ -127,12 +195,15 @@ public class ExamDAO {
         return (ps6.executeUpdate()!=0);
     }
     
-    public static ArrayList<String> getAllStdByExamId(String exid) throws SQLException{
+    public static ArrayList<EnrollDTO> getAllStdByExamId(String exid) throws SQLException{
         ps7.setString(1, exid);
         ResultSet rs = ps7.executeQuery();
-        ArrayList<String> al = new ArrayList<>();
+        ArrayList<EnrollDTO> al = new ArrayList<>();
         while(rs.next()){
-            al.add(rs.getString(1));
+            EnrollDTO obj = new EnrollDTO();
+            obj.setEmail(rs.getString(1));
+            obj.setStatus(rs.getString(2));
+            al.add(obj);
         }
         return al;
     }

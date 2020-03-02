@@ -33,9 +33,15 @@
                     <div class="col-lg-12">
                         <b>Wrong Answer: </b><%=robj.getWrongans()%>
                     </div>
+                    <div class="col-lg-12">
+                        <b>Unattempted: </b><%=robj.getUnattempt() %>
+                    </div>
                     <div class="col-lg-12" style="color: green">
                         <b>Percentage: </b><%=robj.getPercentage()%>%
                     </div>
+                    <div class="col-lg-12" style="color: green">
+                        <button class="btn btn-danger" onclick="window.print()">PRINT</button>
+                    </div> 
                     <div class="col-lg-12" style="color: green">
                         <button class="btn btn-toolbar" onclick="backexam()">Back</button>
                     </div>                    

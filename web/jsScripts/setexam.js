@@ -41,6 +41,14 @@ function processresponseforsetexam(responseText) {
         toastr["info"]("Save Successfully", "SAVED!");
         setTimeout(onloadmyfunction,3000);
     }
+    else if(responseText === "Paper Start"){
+        toastr["info"]("Start Successfully", "Started!");
+        setTimeout(onloadmyfunction,3000);
+    }
+    else if(responseText === "End Paper"){
+        toastr["info"]("End Successfully", "Ended!");
+        setTimeout(onloadmyfunction,3000);
+    }
     else{
         $(".data-result").append(responseText);
     }

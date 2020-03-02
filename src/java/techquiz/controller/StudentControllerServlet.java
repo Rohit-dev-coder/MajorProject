@@ -14,11 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import techquiz.dao.ExamDAO;
+import techquiz.dao.ResultDAO;
 import techquiz.dao.UserDAO;
 import techquiz.dto.EnrollDTO;
 import techquiz.dto.ExamDTO;
 import techquiz.dto.QuestionDTO;
 import techquiz.dto.UserDetails;
+import techquiz.dto.examsampleinfo;
+import techquiz.dto.rankDTO;
 import techquiz.dto.stdexamdetails;
 import techquiz.dto.testdetail;
 
@@ -92,7 +95,9 @@ public class StudentControllerServlet extends HttpServlet {
                         }
                     }
                     else if(queryof.equalsIgnoreCase("ResultList")){
-                        rd=request.getRequestDispatcher("result.jsp");
+                        ArrayList<examsampleinfo> al = ExamDAO.getAllDeclaredExamDetails();
+                        request.setAttribute("al", al);
+                        rd=request.getRequestDispatcher("resultlistforstudent.jsp");
                     }
                     else if(queryof.equalsIgnoreCase("Forum")){
                         rd=request.getRequestDispatcher("forum.jsp");

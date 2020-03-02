@@ -19,6 +19,7 @@ import techquiz.dao.McqDAO;
 import techquiz.dao.QuestionDAO;
 import techquiz.dao.fupsDAO;
 import techquiz.dao.tfDAO;
+import techquiz.dto.EnrollDTO;
 import techquiz.dto.ExamDTO;
 import techquiz.dto.QuestionDTO;
 import techquiz.dto.fupsDTO;
@@ -91,7 +92,7 @@ public class SetQuestionsControllerServlet extends HttpServlet {
                 } else if (code.equalsIgnoreCase("cancleexam")) {
                     session.removeAttribute("paperdetails");
                     session.removeAttribute("currentQuestionNo");
-                    session.setMaxInactiveInterval(60 * 5);
+                    session.setMaxInactiveInterval(60 * 2);
                     rd = request.getRequestDispatcher("setexam.jsp");
                 } else if (code.equalsIgnoreCase("nextque")) {
                     allQuestion = (ArrayList<QuestionDTO>) session.getAttribute("allquestion");
@@ -225,14 +226,14 @@ public class SetQuestionsControllerServlet extends HttpServlet {
                     session.removeAttribute("allmcqanswer");
                     session.removeAttribute("alltfanswer");
                     session.removeAttribute("allfupsanswer");
-                    session.setMaxInactiveInterval(60 * 5);
+                    session.setMaxInactiveInterval(60 * 2);
 
                     session.setAttribute("status", "save");
                     rd = request.getRequestDispatcher("responses.jsp");
 
                 }else if (code.equalsIgnoreCase("showstd")){
                     String eid = request.getParameter("data");
-                    ArrayList<String> al = ExamDAO.getAllStdByExamId(eid);
+                    ArrayList<EnrollDTO> al = ExamDAO.getAllStdByExamId(eid);
                     request.setAttribute("al", al);
                     rd = request.getRequestDispatcher("showenrollstd.jsp");
                 }

@@ -1,3 +1,4 @@
+<%@page import="techquiz.dto.EnrollDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%
     String userid = (String) session.getAttribute("username");
@@ -13,7 +14,7 @@
         response.sendRedirect("accessdenied.html");
         return;
     }
-    ArrayList<String> al = (ArrayList<String>) request.getAttribute("al");
+    ArrayList<EnrollDTO> al = (ArrayList<EnrollDTO>) request.getAttribute("al");
 
 %>
 <div class="container-fluid dashboardbgimg" style="padding-left:unset;padding-right: unset;">
@@ -38,17 +39,27 @@
                     <thead>
                         <tr>
                             <th scope="col">SNO</th>
-                            <th scope="col">STUDENT</th>                          
+                            <th scope="col">STUDENT</th>    
+                            <th scope="col">STATUS</th>    
                         </tr>
                     </thead>
                     <tbody>
                         <%                            int i = 1;
-                            for (String o : al) {
+                            for (EnrollDTO o : al) {
                         %>
                         <tr>
                             <td><%= i%></td>
-                            <td><%= o%></td>
-
+                            <td><%= o.getEmail() %></td>
+                            <%
+                                String sss = o.getStatus();
+                                if(sss.equalsIgnoreCase("E")){
+                            %>
+                            <td><p style="color: red">Just Enroll</p></td>
+                            <%}else if(sss.equalsIgnoreCase("R")){
+                             %>
+                            <td><p style="color: green">Test Done</p></td>
+                            <% }
+                            %>
                             <% ++i;
                                 }%>
                         </tr>   

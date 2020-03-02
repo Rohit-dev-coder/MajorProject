@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package techquiz.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,31 +18,37 @@ import techquiz.dto.UserDTO;
 
 public class LoginControllerServlet extends HttpServlet {
 
-  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd=null;
-        String username=request.getParameter("username");
-        String password=request.getParameter("password");
+        RequestDispatcher rd = null;
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         String utype = request.getParameter("type");
-        
-        UserDTO user=new UserDTO(username,password,utype);
-        System.out.println(user);
-        try{
-            boolean result = UserDAO.validateUser(user);
-            System.out.println(result);
-            request.setAttribute("result",result);
-            request.setAttribute("utype", utype);
-            request.setAttribute("username",username);
-            rd=request.getRequestDispatcher("loginresponse.jsp");
-        }
-        catch(SQLException e) {
-            request.setAttribute("exception",e);
-            rd=request.getRequestDispatcher("showexception.jsp");
-            e.printStackTrace();
-        }
-        finally
-        {
+
+        UserDTO user = new UserDTO(username, password, utype);
+//        System.out.println(user);
+        try {
+            Enumeration en = request.getHeaderNames();
+            String headervalue = request.getHeader("user-agent");
+            
+            if (headervalue.contains("Chrome")==false || headervalue.contains("Edge")==true) {
+//                System.out.println("false");
+                request.setAttribute("status","false");
+                rd = request.getRequestDispatcher("loginresponse.jsp");
+            } else {
+                boolean result = UserDAO.validateUser(user);
+//            System.out.println(result);
+                request.setAttribute("result", result);
+                request.setAttribute("utype", utype);
+                request.setAttribute("username", username);
+                request.setAttribute("status","true");
+                rd = request.getRequestDispatcher("loginresponse.jsp");
+            }
+
+        } catch (SQLException e) {
+            request.setAttribute("exception", e);
+            rd = request.getRequestDispatcher("showexception.jsp");
+        } finally {
             rd.forward(request, response);
         }
     }

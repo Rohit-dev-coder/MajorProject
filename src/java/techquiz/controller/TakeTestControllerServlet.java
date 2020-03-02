@@ -87,62 +87,70 @@ public class TakeTestControllerServlet extends HttpServlet {
                     String tname = UserDAO.getTeacherName(obj.getEmail());
                     obj.setTeachername(tname);
                     session.setAttribute("examdetails", obj);
-                    session.setMaxInactiveInterval(60 * 10);
+                    session.setMaxInactiveInterval(60 * 60 * 4);
                     rd = request.getRequestDispatcher("testconfirmation.jsp");
                 } else if (code.equalsIgnoreCase("cancelexm")) {
                     session.removeAttribute("examdetails");
-                    session.setMaxInactiveInterval(60 * 15);
+                    session.setMaxInactiveInterval(60 * 2);
                     rd = request.getRequestDispatcher("StudentControllerServlet?data=exams");
                 } else if (code.equalsIgnoreCase("startexam")) {
                     testdetail obj = (testdetail) session.getAttribute("examdetails");
                     ArrayList<QuestionDTO> qal = QuestionDAO.getAllQuestionByExamid(obj.getExamId());
                     ArrayList<mcqOptionsDTO> mcqal = new ArrayList<>();
+                    String min = ExamDAO.getexamminutes(obj.getExamId());
                     for (QuestionDTO qq : qal) {
                         if (qq.getqType().equalsIgnoreCase("mcq")) {
                             mcqOptionsDTO ooo = McqDAO.getAllOptions(qq.getQid());
                             mcqal.add(ooo);
                         }
                     }
+                    request.setAttribute("min", min);
                     session.setAttribute("allquestion", qal);
                     session.setAttribute("questionsoption", mcqal);
                     rd = request.getRequestDispatcher("exampage.jsp");
                 } else if (code.equalsIgnoreCase("submitexam")) {
-                    testdetail obj = (testdetail) session.getAttribute("examdetails");
+                    testdetail obj = (testdetail)session.getAttribute("examdetails");
                     ArrayList<QuestionDTO> allques = (ArrayList<QuestionDTO>) session.getAttribute("allquestion");
                     int cans = 0;
                     int wans = 0;
                     int uattemp = 0;
                     for (QuestionDTO o : allques) {
-                        String answer = request.getParameter(o.getQid()).trim();
+                        String answer = null;
+                        try{
+                            answer = request.getParameter(o.getQid()).trim();
+                        }catch(Exception e){
+                              ++uattemp;
+                              continue;
+                        }
 //                        System.out.print(o.getQid()+"::::::"+answer);
                         String questype = QuestionDAO.getQuestionType(o.getQid());
                         if (questype.equalsIgnoreCase("mcq")) {
                             String corrans = McqDAO.getcanswer(o.getQid());
 //                            System.out.println(":::::"+corrans);
-                            if (corrans.equalsIgnoreCase(answer)) {
-                                ++cans;
-                            } else if (corrans.equalsIgnoreCase("")) {
+                            if (answer.equalsIgnoreCase("")) {
                                 ++uattemp;
+                            } else if (answer.equalsIgnoreCase(corrans)) {
+                                ++cans;
                             } else {
                                 ++wans;
                             }
                         } else if (questype.equalsIgnoreCase("fups")) {
                             String corrans = fupsDAO.getCorrAnswer(o.getQid());
 //                            System.out.println(":::::"+corrans);
-                            if (corrans.equalsIgnoreCase(answer)) {
-                                ++cans;
-                            } else if (corrans.equalsIgnoreCase("")) {
+                            if (answer.equalsIgnoreCase("")) {
                                 ++uattemp;
+                            } else if (answer.equalsIgnoreCase(corrans)) {
+                                ++cans;
                             } else {
                                 ++wans;
                             }
                         } else if (questype.equalsIgnoreCase("tf")) {                            
                             String corrans = tfDAO.getCorrAnswer(o.getQid());
 //                            System.out.println(":::::"+corrans);
-                            if (corrans.equalsIgnoreCase(answer)) {
-                                ++cans;
-                            } else if (corrans.equalsIgnoreCase("")) {
+                            if (answer.equalsIgnoreCase("select")) {
                                 ++uattemp;
+                            } else if (answer.equalsIgnoreCase(corrans)) {
+                                ++cans;
                             } else {
                                 ++wans;
                             }
@@ -158,10 +166,12 @@ public class TakeTestControllerServlet extends HttpServlet {
                     robj.setTotalattempt(obj.getTotalQuestion() - uattemp);
                     robj.setTotalmarks(obj.getTotalMarks());
                     robj.calculatePercentage();
+                    System.out.println(robj);
                     ExamDAO.updateEnrollTableStatus(obj.getExamId(), username);
                     session.removeAttribute("examdetails");
                     session.removeAttribute("allquestion");
                     session.removeAttribute("questionsoption");
+                    session.setMaxInactiveInterval(60*2);
                     request.setAttribute("result", robj);
 //                    System.out.println(robj);
                     boolean result = ResultDAO.saveResult(robj);

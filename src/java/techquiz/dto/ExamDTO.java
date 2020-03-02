@@ -3,12 +3,13 @@ package techquiz.dto;
 
 
 public class ExamDTO {
-    String examId;
-    String examTitle;
-    String examDateTime;
-    int totalQuestion;
-    int totalMarks;
-    String email;
+    private String examId;
+    private String examTitle;
+    private String examDateTime;
+    private int totalQuestion;
+    private int totalMarks;
+    private String email;
+    private String status;
 
     public ExamDTO(String examId, String examTitle, String examDateTime, int totalQuestion, int totalMarks, String email) {
         this.examId = examId;
@@ -75,6 +76,14 @@ public class ExamDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
     

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <listener>
+        <description>HttpSessionListener</description>
+        <listener-class>techquiz.controller.userCountListener</listener-class>
+    </listener>
     <servlet>
         <servlet-name>RegistrationControllerServlet</servlet-name>
         <servlet-class>techquiz.controller.RegistrationControllerServlet</servlet-class>
@@ -32,6 +36,10 @@
         <servlet-name>EditQuestionsControllerServlet</servlet-name>
         <servlet-class>techquiz.controller.EditQuestionsControllerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowResultController</servlet-name>
+        <servlet-class>techquiz.controller.ShowResultController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationControllerServlet</servlet-name>
         <url-pattern>/RegistrationControllerServlet</url-pattern>
@@ -63,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>EditQuestionsControllerServlet</servlet-name>
         <url-pattern>/EditQuestionsControllerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowResultController</servlet-name>
+        <url-pattern>/ShowResultController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

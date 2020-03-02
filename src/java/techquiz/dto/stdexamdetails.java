@@ -2,11 +2,12 @@
 package techquiz.dto;
 
 public class stdexamdetails {
-    String examId;
-    String examTitle;
-    String examDateTime;
-    String email;
-    String status;
+    private String examId;
+    private String examTitle;
+    private String examDateTime;
+    private String email;
+    private String status;
+    private String examstatus;
 
     public stdexamdetails(String examId, String examTitle, String examDateTime, String email, String status) {
         this.examId = examId;
@@ -20,8 +21,17 @@ public class stdexamdetails {
     public String toString() {
         return "stdexamdetails{" + "examId=" + examId + ", examTitle=" + examTitle + ", examDateTime=" + examDateTime + ", email=" + email + ", status=" + status + '}';
     }
+
+    public String getExamstatus() {
+        return examstatus;
+    }
+
+    public void setExamstatus(String examstatus) {
+        this.examstatus = examstatus;
+    }
     
 
+    
     public stdexamdetails() {
     }
     

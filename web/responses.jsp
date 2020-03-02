@@ -21,10 +21,16 @@
     String status = (String)session.getAttribute("status");
     if(status != null)
     {
+        session.removeAttribute("status");
         if(status.equalsIgnoreCase("save"))
         {
-            session.removeAttribute("status");
             out.println("saveexam");
+        }
+        else if(status.equalsIgnoreCase("Paper Start")){
+            out.println("Paper Start");
+        }
+        else if(status.equalsIgnoreCase("Paper End")){
+            out.println("End Paper");
         }
     }
     else{

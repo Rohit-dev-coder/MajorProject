@@ -1,3 +1,4 @@
+<%@page import="techquiz.controller.userCountListener"%>
 <!doctype html>
 <html lang="en">
     <%
@@ -53,7 +54,7 @@
 
 </head>
 
-<body>
+<body oncontextmenu="return false">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <a class="navbar-brand" href="#">TechQuiz</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -111,7 +112,7 @@
                         <li class="nav-item">
                             <span class="nav-link" id="Forum" onclick="showContent(this)">
                                 <span data-feather="users"></span>
-                                Forum
+                                Forum <span style="color: lightgreen">(<%= userCountListener.usercount %> online)</span>
                             </span>
                         </li>
                         <li class="nav-item">

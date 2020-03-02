@@ -15,13 +15,14 @@ import techquiz.dto.QuestionDTO;
 
 public class QuestionDAO {
     private static Statement st;
-    private static PreparedStatement ps,ps1,ps2;
+    private static PreparedStatement ps,ps1,ps2,ps3;
     static{
         try{   
             st = DBConnection.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
             ps = DBConnection.getConnection().prepareStatement("insert into questions values (?,?,?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select * from questions where examid = ?");
             ps2 = DBConnection.getConnection().prepareStatement("select qtype from questions where qid = ?");
+            ps3 = DBConnection.getConnection().prepareStatement("select qid from questions where examid = ?");
         }
         catch(SQLException ex)
         {
@@ -68,6 +69,16 @@ public class QuestionDAO {
         ResultSet rs = ps2.executeQuery();
         rs.next();
         return rs.getString(1);
+    }
+    
+    public static ArrayList<String> getAllQidbyEid(String qid) throws SQLException{
+        ps3.setString(1, qid);
+        ResultSet rs = ps3.executeQuery();
+        ArrayList<String> al = new ArrayList<>();
+        while(rs.next()){
+            al.add(rs.getString(1));
+        }
+        return al;
     }
     
 }

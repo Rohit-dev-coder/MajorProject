@@ -35,21 +35,20 @@
 %>
             
     <div class="container-fluid dashboardbgimg">
-        <div class="col-md-4 mx-auto">
+        <div class="col-lg-4 mx-auto">
             <div class="resultBox">
                 <div class="dashboardHeading">
                     <center>Profile</center>
                 </div>
-                
                 <br>
+                
                 <div class="dashboardContent" style="line-height: 3rem">
                     <b>Name : </b><%= obj.getFname()%> <%= obj.getSname() %><br>
                     <b>Email : </b><%= obj.getEmail() %><br>
                     <b>Gender : </b><%= obj.getGender() %><br>
                     <b>Mobile_No: </b>+91 <%= obj.getMobile() %><br>
                 </div>
-            </div>
-            
+            </div>            
         </div>   
     </div>
 

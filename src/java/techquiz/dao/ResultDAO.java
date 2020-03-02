@@ -4,16 +4,21 @@ package techquiz.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import techquiz.dbutil.DBConnection;
+import techquiz.dto.rankDTO;
 import techquiz.dto.resultDTO;
 
 
 public class ResultDAO {
-    private static PreparedStatement ps1,ps2;
+    private static PreparedStatement ps1,ps2,ps3,ps4;
     static{
         try{   
+            ps3 = DBConnection.getConnection().prepareStatement("select email,percentage from results where examid = ? order by percentage desc");
             ps1 = DBConnection.getConnection().prepareStatement("insert into results values (?,?,?,?,?,?,?,?,?)");
             ps2 = DBConnection.getConnection().prepareStatement("select * from results where email = ? and examid = ?");
+            ps4 = DBConnection.getConnection().prepareStatement("delete from results where examid = ?");
         }
         catch(SQLException ex)
         {
@@ -50,5 +55,24 @@ public class ResultDAO {
         robj.setWrongans(rs.getInt("wrongans"));
         robj.setPercentage(rs.getDouble("percentage"));
         return robj;
+    }
+    
+    public static ArrayList<rankDTO> getAllResultbyexamid(String eid) throws SQLException{
+        ps3.setString(1, eid);
+        ResultSet rs = ps3.executeQuery();
+        ArrayList<rankDTO> al = new ArrayList<>();
+        
+        while(rs.next()){
+            rankDTO obj = new rankDTO();
+            obj.setEmail(rs.getString(1));
+            obj.setPer(rs.getDouble(2));
+            al.add(obj);
+        }
+        return al;
+    }
+    
+    public static boolean deleteAllResultbyexamid(String eid) throws SQLException{
+        ps4.setString(1, eid);
+        return ps4.executeUpdate()!=0;
     }
 }

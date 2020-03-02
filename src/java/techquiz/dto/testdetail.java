@@ -3,14 +3,14 @@ package techquiz.dto;
 
 
 public class testdetail {
-    String examId;
-    String examTitle;
-    String examDateTime;
-    int totalQuestion;
-    int totalMarks;
-    String email;
-    String teachername;
-    String status;
+    private String examId;
+    private String examTitle;
+    private String examDateTime;
+    private int totalQuestion;
+    private int totalMarks;
+    private String email;
+    private String teachername;
+    private String status;
 
     public testdetail() {
     }

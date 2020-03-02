@@ -1,3 +1,4 @@
+<%@page import="techquiz.controller.userCountListener"%>
 <!doctype html>
 <html lang="en">
 <%
@@ -110,15 +111,15 @@
                         </li>
                         
                         <li class="nav-item">
-                            <span class="nav-link" id="Declared-Result" onclick="showContent(this)">
+                            <span class="nav-link" id="Declared-Rank" onclick="showContent(this)">
                                 <span data-feather="users"></span>
-                                Declared Result
+                                Declared RANK
                             </span>
                         </li>
                         <li class="nav-item">
                             <span class="nav-link" id="Forum" onclick="showContent(this)">
                                 <span data-feather="users"></span>
-                                Forum
+                                Forum<span style="color: lightgreen">( <%= userCountListener.usercount %> online)</span>
                             </span>
                         </li>
                         <li class="nav-item">

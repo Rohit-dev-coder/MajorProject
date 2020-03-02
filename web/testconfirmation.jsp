@@ -92,7 +92,8 @@
                     <div class="col-md-6 mx-auto">
                         <p style="color: blue"> Test Not Started Yet. Reload page.</p>
                     </div>
-                    <% }else{ %>
+                    <% }else if(status.equalsIgnoreCase("S")){ 
+                    %>
                     <script type="text/javascript">
                         function startexambtn(){
                                 if(checkboxresult === true){
@@ -109,7 +110,17 @@
                     <div class="col-md-6 mx-auto">
                         <button class="btn btn-primary btn-block" id="startexambtn" onclick="startexambtn()">Start Exam</button>
                     </div>
-                    <% } %> 
+                    <% }else if(status.equalsIgnoreCase("R")){
+                     %>
+                     <div class="col-md-6 mx-auto">
+                        <p style="color: red">EXAM END</p>
+                    </div>
+                    <% }else{ %>
+                    <div class="col-md-6 mx-auto">
+                        <p style="color: blue"> Error to start paper. Reload page.</p>
+                    </div>
+                    <% } 
+                    %>
                 </div>
                 <br>
             </div>

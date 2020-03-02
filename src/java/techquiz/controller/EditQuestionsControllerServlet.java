@@ -7,14 +7,19 @@ package techquiz.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import techquiz.dao.ExamDAO;
+import techquiz.dao.QuestionDAO;
+import techquiz.dao.ResultDAO;
 import techquiz.dao.UserDAO;
 import techquiz.dto.UserDetails;
+import techquiz.dto.rankDTO;
 
 
 public class EditQuestionsControllerServlet extends HttpServlet {
@@ -46,11 +51,69 @@ public class EditQuestionsControllerServlet extends HttpServlet {
                 } 
                 else if (usertype.equalsIgnoreCase("teacher")) {
                     String queryof = (String) request.getParameter("code");
+                    System.out.println("query for"+queryof);
                     if (queryof.equalsIgnoreCase("editexam")) {
                         String examid = (String) request.getParameter("data");
-
-                        rd = request.getRequestDispatcher("userdetails.jsp");
+                        ArrayList<String> al = QuestionDAO.getAllQidbyEid(examid);                        
+                        rd = request.getRequestDispatcher("editpaper.jsp");
                     }
+                    else if(queryof.equalsIgnoreCase("startexam")){
+                        String examid = (String) request.getParameter("data");
+                        String min = (String) request.getParameter("min");
+                        
+                        boolean result = ExamDAO.startexam(examid,min);
+                        if (result == false){
+                            Exception e = new Exception();
+                            throw e;
+                        }
+                        session.setAttribute("status","Paper Start");
+                        rd = request.getRequestDispatcher("responses.jsp");
+                    }
+                    else if(queryof.equalsIgnoreCase("endexam")){
+                        String examid = (String) request.getParameter("data");
+                        boolean result = ExamDAO.endexam(examid);
+                        if (result == false){
+                            Exception e = new Exception();
+                            throw e;
+                        }
+                        session.setAttribute("status","Paper End");
+                        rd = request.getRequestDispatcher("responses.jsp");
+                    }
+                    else if(queryof.equalsIgnoreCase("declaredrank")){
+                        String examid = (String) request.getParameter("data");
+                        boolean result = ExamDAO.declaredRank(examid);
+                        if (result == false){
+                            Exception e = new Exception();
+                            throw e;
+                        }
+                        rd = request.getRequestDispatcher("TeacherControllerServlet?data=Declared-Rank");
+                    }
+                    else if(queryof.equalsIgnoreCase("showranks")){
+                        String examid = (String) request.getParameter("data");
+                        
+                        ArrayList<rankDTO> al = ResultDAO.getAllResultbyexamid(examid);
+                        request.setAttribute("examid", examid);
+                        request.setAttribute("examtitle", ExamDAO.getExamByID(examid).getExamTitle());
+                        request.setAttribute("result", al);
+                        rd = request.getRequestDispatcher("resultlist.jsp");
+                    }
+                    else if(queryof.equalsIgnoreCase("back")){
+                        rd = request.getRequestDispatcher("TeacherControllerServlet?data=Declared-Rank");
+                    }
+                    else if(queryof.equalsIgnoreCase("deleteresult")){
+                        String examid = (String) request.getParameter("data");
+                        boolean result = ExamDAO.endexam(examid);
+                        
+                        if (result == false){
+                            Exception e = new Exception();
+                            throw e;
+                        }
+                        ExamDAO.deletestdfromenroll(examid);
+                        boolean r= ResultDAO.deleteAllResultbyexamid(examid);
+                                         
+                        rd = request.getRequestDispatcher("TeacherControllerServlet?data=Declared-Rank");
+                    }
+                    
                 }
             } 
             catch (Exception e) {

@@ -60,7 +60,7 @@
                             <th scope="col">EXAM ID</th>
                             <th scope="col">ACTION</th>
                             <th scope="col">TITLE</th>
-                            <th scope="col">DATE</th>
+                            <th scope="col">STATUS</th>
 
                         </tr>
                     </thead>
@@ -84,10 +84,17 @@
                                 <button class="btn btn-success" onclick="resultteststd(this)" id="<%= o.getExamId()%>">VIEW RESULT</button>
                                 <%}
                                 %>
+                                
                             </td>
 
                             <td><%= o.getExamTitle()%></td>
-                            <td><%= o.getExamDateTime()%></td>
+                            <td><% if(o.getExamstatus().equalsIgnoreCase("S")){ %>
+                                <p style="color: green">ONGOING</p>
+                                <% }else if(o.getExamstatus().equalsIgnoreCase("R")){ %>
+                                <p style="color: red">END</p>
+                                <% }else if(o.getExamstatus().equalsIgnoreCase("NS")){ %>
+                                <p style="color: blue">Started Soon</p>
+                                <% } %></td>
 
 
                         </tr>   

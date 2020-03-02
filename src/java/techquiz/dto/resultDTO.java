@@ -7,15 +7,15 @@ package techquiz.dto;
 
 
 public class resultDTO {
-    String emailid;
-    String examid;
-    int totalque;
-    int totalattempt;
-    int rightans;
-    int wrongans;
-    int unattempt;
-    int totalmarks;
-    double percentage;  
+    private String emailid;
+    private String examid;
+    private int totalque;
+    private int totalattempt;
+    private int rightans;
+    private int wrongans;
+    private int unattempt;
+    private int totalmarks;
+    private double percentage;  
 
     public resultDTO(String emailid, String examid, int totalque, int totalattempt, int rightans, int wrongans, int unattempt, int totalmarks) {
         this.emailid = emailid;
@@ -102,7 +102,7 @@ public class resultDTO {
     }
 
     public void calculatePercentage(){
-        int tm = this.totalmarks/this.totalque;   
+        double tm = (double)this.totalmarks/this.totalque;   
         tm = tm*this.rightans;
         this.percentage = ((double)tm/this.totalmarks) * 100;
     }

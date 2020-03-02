@@ -76,8 +76,10 @@ public class TeacherControllerServlet extends HttpServlet {
                     request.setAttribute("allexams", al);
                     rd=request.getRequestDispatcher("examdetails.jsp");
                 }
-                else if(queryof.equalsIgnoreCase("declared-result")){
-                    rd=request.getRequestDispatcher("declaredresult.jsp");
+                else if(queryof.equalsIgnoreCase("Declared-Rank")){
+                    ArrayList<ExamDTO> al = ExamDAO.getAllExamByEmail(username);
+                    request.setAttribute("allexams", al);
+                    rd=request.getRequestDispatcher("declaredrank.jsp");
                 }
                 else if(queryof.equalsIgnoreCase("Forum")){
                     rd=request.getRequestDispatcher("Forum.jsp");

@@ -4,10 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/G:/Major%20Project%20v1/MajorProject/src/java/techquiz/controller/StudentControllerServlet.java</file>
+            <file>file:/G:/Major%20Project%20v1/MajorProject/web/landing.html</file>
+            <file>file:/G:/Major%20Project%20v1/MajorProject/src/java/techquiz/controller/SetQuestionsControllerServlet.java</file>
+            <file>file:/G:/Major%20Project%20v1/MajorProject/web/resultlistforstudent.jsp</file>
             <file>file:/G:/Major%20Project%20v1/MajorProject/web/loginpage.html</file>
-            <file>file:/G:/Major%20Project%20v1/MajorProject/web/testconfirmation.jsp</file>
-            <file>file:/G:/Major%20Project%20v1/MajorProject/src/java/techquiz/controller/TakeTestControllerServlet.java</file>
-            <file>file:/G:/Major%20Project%20v1/MajorProject/web/exampage.jsp</file>
+            <file>file:/G:/Major%20Project%20v1/MajorProject/src/java/techquiz/dao/ExamDAO.java</file>
+            <file>file:/G:/Major%20Project%20v1/MajorProject/src/java/techquiz/controller/ShowResultController.java</file>
+            <file>file:/G:/Major%20Project%20v1/MajorProject/web/exams.jsp</file>
+            <file>file:/G:/Major%20Project%20v1/MajorProject/web/resultlist.jsp</file>
+            <file>file:/G:/Major%20Project%20v1/MajorProject/web/jsScripts/setexam.js</file>
+            <file>file:/G:/Major%20Project%20v1/MajorProject/web/previewquestions.jsp</file>
         </group>
     </open-files>
 </project-private>
