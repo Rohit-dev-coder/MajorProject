@@ -99,6 +99,9 @@ public class StudentControllerServlet extends HttpServlet {
                         request.setAttribute("al", al);
                         rd=request.getRequestDispatcher("resultlistforstudent.jsp");
                     }
+                    else if(queryof.equalsIgnoreCase("News")){
+                        rd=request.getRequestDispatcher("news.jsp");
+                    }
                     else if(queryof.equalsIgnoreCase("Forum")){
                         rd=request.getRequestDispatcher("forum.jsp");
                     }

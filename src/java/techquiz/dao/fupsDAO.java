@@ -5,9 +5,11 @@
  */
 package techquiz.dao;
 
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import techquiz.dbutil.DBConnection;
 import techquiz.dto.fupsDTO;
 import techquiz.dto.mcqDTO;
@@ -15,8 +17,16 @@ import techquiz.dto.mcqDTO;
 
 public class fupsDAO {
     private static PreparedStatement ps,ps1;
+    private static Statement st1;
     static{
-        try{   
+        try{ 
+            DatabaseMetaData dbm = DBConnection.getConnection().getMetaData();
+            ResultSet rs = dbm.getTables(null, null, "FUPS", null);
+            if(!rs.next()) {
+                st1 = DBConnection.getConnection().createStatement();
+                st1.executeQuery("create table fups (qid varchar2(10),canswer varchar2(20))");
+//                System.out.println("table created");  
+            }
             ps = DBConnection.getConnection().prepareStatement("insert into fups values (?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select canswer from fups where qid = ?");
         }

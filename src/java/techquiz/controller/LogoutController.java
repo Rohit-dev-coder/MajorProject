@@ -6,52 +6,50 @@
 package techquiz.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Enumeration;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import techquiz.dao.UserDAO;
-import techquiz.dto.UserDTO;
+import javax.servlet.http.HttpSession;
 
-public class LoginControllerServlet extends HttpServlet {
+/**
+ *
+ * @author PC
+ */
+public class LogoutController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        response.setDateHeader("Expires", -1);
+        PrintWriter pw = response.getWriter();
         RequestDispatcher rd = null;
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String utype = request.getParameter("type");
-
-        UserDTO user = new UserDTO(username, password, utype);
-//        System.out.println(user);
+        HttpSession session = request.getSession();
         try {
-            Enumeration en = request.getHeaderNames();
-            String headervalue = request.getHeader("user-agent");
-            
-            if (headervalue.contains("Chrome")==false || headervalue.contains("Edge")==true) {
-//                System.out.println("false");
-                request.setAttribute("status","false");
-                rd = request.getRequestDispatcher("loginresponse.jsp");
-            } 
-            else {
-                boolean result = UserDAO.validateUser(user);
-//            System.out.println(result);
-                request.setAttribute("result", result);
-                request.setAttribute("utype", utype);
-                request.setAttribute("username", username);
-                request.setAttribute("status","true");
-                rd = request.getRequestDispatcher("loginresponse.jsp");
+            String userid = (String) session.getAttribute("username");
+            String usertype = (String) session.getAttribute("usertype");
+            if (userid == null || usertype == null) {
+                session.invalidate();
+                response.sendRedirect("accessdenied.html");
+                return;
             }
-
-        } catch (SQLException e) {
+            String code = (String) request.getParameter("code");
+//            System.out.println(code);
+            if(code.equalsIgnoreCase("Logout")){
+                session.invalidate();                
+                pw.println("landing.html");
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
             request.setAttribute("exception", e);
             rd = request.getRequestDispatcher("showexception.jsp");
         } finally {
-            rd.forward(request, response);
+            
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

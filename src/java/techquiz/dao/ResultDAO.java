@@ -1,6 +1,7 @@
 
 package techquiz.dao;
 
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +13,17 @@ import techquiz.dto.resultDTO;
 
 
 public class ResultDAO {
+    private static Statement st1;
     private static PreparedStatement ps1,ps2,ps3,ps4;
     static{
         try{   
+            DatabaseMetaData dbm = DBConnection.getConnection().getMetaData();
+            ResultSet rs = dbm.getTables(null, null, "RESULTS", null);
+            if(!rs.next()) {
+                st1 = DBConnection.getConnection().createStatement();
+                st1.executeQuery("create table RESULTS (email varchar2(30), examid varchar2(5), totalques number(3), totalattempt number(3), rightans number(3), wrongans number(3), unattempt number(3), totalmarks number(10), percentage number(5,2))");
+            }
+            
             ps3 = DBConnection.getConnection().prepareStatement("select email,percentage from results where examid = ? order by percentage desc");
             ps1 = DBConnection.getConnection().prepareStatement("insert into results values (?,?,?,?,?,?,?,?,?)");
             ps2 = DBConnection.getConnection().prepareStatement("select * from results where email = ? and examid = ?");

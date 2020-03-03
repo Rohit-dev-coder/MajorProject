@@ -5,6 +5,7 @@
  */
 package techquiz.dao;
 
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,10 +15,17 @@ import techquiz.dbutil.DBConnection;
 import techquiz.dto.QuestionDTO;
 
 public class QuestionDAO {
-    private static Statement st;
+    private static Statement st,st1;
     private static PreparedStatement ps,ps1,ps2,ps3;
     static{
-        try{   
+        try{  
+            DatabaseMetaData dbm = DBConnection.getConnection().getMetaData();
+            ResultSet rs = dbm.getTables(null, null, "QUESTIONS", null);
+            if(!rs.next()) {
+                st1 = DBConnection.getConnection().createStatement();
+                st1.executeQuery("create table questions (examid varchar2(5), qtype varchar2(4) constraints ques_ck check (qtype in ('mcq','tf','fups')),qid varchar2(10), question varchar2(4000))");
+            }
+            
             st = DBConnection.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
             ps = DBConnection.getConnection().prepareStatement("insert into questions values (?,?,?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select * from questions where examid = ?");

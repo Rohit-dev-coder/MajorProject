@@ -1,16 +1,26 @@
 
 package techquiz.dao;
 
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import techquiz.dbutil.DBConnection;
 import techquiz.dto.tfDTO;
 
 public class tfDAO {
     private static PreparedStatement ps,ps1;
+    private static Statement st1;
     static{
         try{   
+            DatabaseMetaData dbm = DBConnection.getConnection().getMetaData();
+            ResultSet rs = dbm.getTables(null, null, "TF", null);
+            if(!rs.next()) {
+                st1 = DBConnection.getConnection().createStatement();
+                st1.executeQuery("create table tf (qid varchar2(10),canswer varchar2(5) constraints tf_c_ck check (canswer in ('true','false')))");
+//                System.out.println("table created");  
+            }
             ps = DBConnection.getConnection().prepareStatement("insert into tf values (?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select canswer from tf where qid = ?");
         }

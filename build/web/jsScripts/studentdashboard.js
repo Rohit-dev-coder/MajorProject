@@ -72,12 +72,28 @@ function showContent(e)
     atabLinks.classList.add("active");
 
 
-
     var data = {
         data: id
     };
     clearDataResult();
     $.post("StudentControllerServlet", data, processresponse);
+}
+
+function logoutdas(x){
+    var id = x.getAttribute("id");
+    var data = {
+        code: id
+    };
+    clearDataResult();
+    $.post("LogoutController", data, function(responseText){
+        responseText = responseText.trim();
+        console.log(responseText);
+        if(responseText.indexOf("html") != -1){
+            window.location = responseText;
+        }else{
+            window.location = "accessdenied.html";
+        }
+    });
 }
 
 

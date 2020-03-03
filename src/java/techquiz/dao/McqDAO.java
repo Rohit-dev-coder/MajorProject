@@ -5,18 +5,28 @@
  */
 package techquiz.dao;
 
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import techquiz.dbutil.DBConnection;
 import techquiz.dto.mcqDTO;
 import techquiz.dto.mcqOptionsDTO;
 
 
 public class McqDAO {
+    private static Statement st1;
     private static PreparedStatement ps,ps1,ps2;
     static{
-        try{   
+        try{  
+            DatabaseMetaData dbm = DBConnection.getConnection().getMetaData();
+            ResultSet rs = dbm.getTables(null, null, "MCQ", null);
+            if(!rs.next()) {
+                st1 = DBConnection.getConnection().createStatement();
+                st1.executeQuery("create table mcq (qid varchar2(10), option1 varchar2(1000), option2 varchar2(1000),option3 varchar2(1000), option4 varchar2(1000), canswer varchar2(30))");
+//                System.out.println("table created");  
+            }
             ps = DBConnection.getConnection().prepareStatement("insert into mcq values (?,?,?,?,?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select option1,option2, option3, option4 from mcq where qid = ?");
             ps2 = DBConnection.getConnection().prepareStatement("select canswer from mcq where qid = ?");

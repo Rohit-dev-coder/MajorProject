@@ -20,86 +20,72 @@ import techquiz.dto.ExamDTO;
 import techquiz.dto.UserDetails;
 
 public class TeacherControllerServlet extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         response.setDateHeader("Expires", -1);
 //        System.out.println("Teacher controller");
-        RequestDispatcher rd=null;
-        HttpSession session=request.getSession();
-        try
-        {
-            String username=(String)session.getAttribute("username");
-            String usertype=(String)session.getAttribute("usertype");
-            System.out.println("userid "+ username);
-            if(username == null || usertype == null)
-            {
+        RequestDispatcher rd = null;
+        HttpSession session = request.getSession();
+        try {
+            String username = (String) session.getAttribute("username");
+            String usertype = (String) session.getAttribute("usertype");
+            System.out.println("userid " + username);
+            if (username == null || usertype == null) {
                 session.invalidate();
                 System.out.println("failed redirect");
                 response.sendRedirect("loginpage.html");
                 return;
             }
-            
-            if(usertype.equalsIgnoreCase("student")){
+
+            if (usertype.equalsIgnoreCase("student")) {
                 session.invalidate();
                 response.sendRedirect("accessdenied.html");
                 return;
-            }
-            else if(usertype.equalsIgnoreCase("teacher"))
-            {
-                String queryof = (String)request.getParameter("data");
-                System.out.println("Queryfor "+ queryof);
-                if (queryof.equalsIgnoreCase("profile"))
-                {
+            } else if (usertype.equalsIgnoreCase("teacher")) {
+                String queryof = (String) request.getParameter("data");
+                System.out.println("Queryfor " + queryof);
+                if (queryof.equalsIgnoreCase("profile")) {
                     UserDetails obj = UserDAO.getSingleUserDetail(username);
                     System.out.println(obj);
                     request.setAttribute("data", obj);
                     request.setAttribute("result", "studentdetails");
                     rd = request.getRequestDispatcher("userdetails.jsp");
-                }
-                else if(queryof.equalsIgnoreCase("Set-exams")){
-                    ExamDTO o = (ExamDTO)session.getAttribute("paperdetails");
-                    if(o==null)
-                    {
-                        rd=request.getRequestDispatcher("setexam.jsp");
-                    }
-                    else{
-                        int i = (int)session.getAttribute("currentQuestionNo");
-                        if(i == o.getTotalQuestion()){
+                } else if (queryof.equalsIgnoreCase("Set-exams")) {
+                    ExamDTO o = (ExamDTO) session.getAttribute("paperdetails");
+                    if (o == null) {
+                        rd = request.getRequestDispatcher("setexam.jsp");
+                    } else {
+                        int i = (int) session.getAttribute("currentQuestionNo");
+                        if (i == o.getTotalQuestion()) {
                             rd = request.getRequestDispatcher("previewquestions.jsp");
                         }
-                        rd=request.getRequestDispatcher("setquestions.jsp");
+                        rd = request.getRequestDispatcher("setquestions.jsp");
                     }
-                }
-                else if(queryof.equalsIgnoreCase("Exams-details")){
+                } else if (queryof.equalsIgnoreCase("Exams-details")) {
                     ArrayList<ExamDTO> al = ExamDAO.getAllExamByEmail(username);
                     request.setAttribute("allexams", al);
-                    rd=request.getRequestDispatcher("examdetails.jsp");
-                }
-                else if(queryof.equalsIgnoreCase("Declared-Rank")){
+                    rd = request.getRequestDispatcher("examdetails.jsp");
+                } else if (queryof.equalsIgnoreCase("Declared-Rank")) {
                     ArrayList<ExamDTO> al = ExamDAO.getAllExamByEmail(username);
                     request.setAttribute("allexams", al);
-                    rd=request.getRequestDispatcher("declaredrank.jsp");
-                }
-                else if(queryof.equalsIgnoreCase("Forum")){
-                    rd=request.getRequestDispatcher("Forum.jsp");
-                }
-                else if(queryof.equalsIgnoreCase("Settings")){
-                    rd=request.getRequestDispatcher("settings.jsp");
-                }
-                else{
+                    rd = request.getRequestDispatcher("declaredrank.jsp");
+                } else if (queryof.equalsIgnoreCase("Forum")) {
+                    rd = request.getRequestDispatcher("Forum.jsp");
+                } else if (queryof.equalsIgnoreCase("News")) {
+                    rd = request.getRequestDispatcher("news.jsp");
+                } else if (queryof.equalsIgnoreCase("Settings")) {
+                    rd = request.getRequestDispatcher("settings.jsp");
+                } else {
                     request.setAttribute("result", "error");
                 }
-            }   
-        }
-        catch(Exception e)
-        {
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("exception", e);
-            rd=request.getRequestDispatcher("showexception.jsp");
-        }
-        finally
-        {
+            rd = request.getRequestDispatcher("showexception.jsp");
+        } finally {
             rd.forward(request, response);
         }
     }
