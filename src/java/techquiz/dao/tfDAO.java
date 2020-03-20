@@ -20,6 +20,7 @@ public class tfDAO {
                 st1 = DBConnection.getConnection().createStatement();
                 st1.executeQuery("create table tf (qid varchar2(10),canswer varchar2(5) constraints tf_c_ck check (canswer in ('true','false')))");
 //                System.out.println("table created");  
+                 st1.executeQuery("commit");
             }
             ps = DBConnection.getConnection().prepareStatement("insert into tf values (?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select canswer from tf where qid = ?");

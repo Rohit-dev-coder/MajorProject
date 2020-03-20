@@ -24,8 +24,9 @@ public class fupsDAO {
             ResultSet rs = dbm.getTables(null, null, "FUPS", null);
             if(!rs.next()) {
                 st1 = DBConnection.getConnection().createStatement();
-                st1.executeQuery("create table fups (qid varchar2(10),canswer varchar2(20))");
+                st1.executeQuery("create table fups (qid varchar2(1000),canswer varchar2(20))");
 //                System.out.println("table created");  
+                st1.executeQuery("commit");
             }
             ps = DBConnection.getConnection().prepareStatement("insert into fups values (?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select canswer from fups where qid = ?");

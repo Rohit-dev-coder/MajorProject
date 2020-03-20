@@ -36,6 +36,7 @@
         <!-- Custom styles for this template -->
         <link href="css/dashboard.css" rel="stylesheet">
         <link rel="stylesheet" href="css/myloader.css">
+        <link rel="stylesheet" href="css/wchat.css">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
@@ -60,18 +61,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">ABOUT US</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">FORUM</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">CONTACT US</a>
-                    </li>
+                    
 
                 </ul>
                 <div class="btn-group mt-2">
@@ -106,9 +96,9 @@
                                 </span>
                             </li>
                             <li class="nav-item">
-                                <span class="nav-link" id="Forum" onclick="showContent(this)">
+                                <span class="nav-link" id="wchat" onclick="showContent(this)">
                                     <span data-feather="users"></span>
-                                    Forum <span style="color: lightgreen">(<%= userCountListener.usercount%> online)</span>
+                                    World Chat<span style="color: lightgreen">( <%= userCountListener.usercount%> online)</span>
                                 </span>
                             </li>
                             <li class="nav-item">

@@ -28,6 +28,7 @@ public class RegistrationDao {
             if(!rs.next()) {
                 st1 = DBConnection.getConnection().createStatement();
                 st1.executeQuery("create table user_details (fname varchar2(15),sname varchar2(15), email varchar2(30), mobile_no number(10), gender varchar2(10), pwd varchar2(30), usertype varchar2(10) constraints user_type_ck check (usertype in ('student','teacher')))");
+                 st1.executeQuery("commit");
             }
             
             ps=DBConnection.getConnection().prepareStatement("select * from user_details where email=?");

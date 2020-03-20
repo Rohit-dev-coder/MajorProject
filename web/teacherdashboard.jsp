@@ -40,6 +40,7 @@
         <!-- Custom styles for this template -->
         <link href="css/dashboard.css" rel="stylesheet">
         <link rel="stylesheet" href="css/myloader.css">
+        <link rel="stylesheet" href="css/wchat.css">
 
 
         <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
@@ -62,18 +63,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">ABOUT US</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">FORUM</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">CONTACT US</a>
-                    </li>
+
                 </ul>
                 <div class="btn-group mt-2">
                     <button type="button" class="btn btn-info" onclick="onloadmyfunction()"><%=userid%></button>
@@ -120,9 +110,9 @@
                                 </span>
                             </li>
                             <li class="nav-item">
-                                <span class="nav-link" id="Forum" onclick="showContent(this)">
+                                <span class="nav-link" id="wchat" onclick="showContent(this)">
                                     <span data-feather="users"></span>
-                                    Forum<span style="color: lightgreen">( <%= userCountListener.usercount%> online)</span>
+                                    World Chat<span style="color: lightgreen">( <%= userCountListener.usercount%> online)</span>
                                 </span>
                             </li>
                             <li class="nav-item">
@@ -137,6 +127,7 @@
                                     LOGOUT
                                 </span>
                             </li>
+
                         </ul>
 
 
@@ -167,7 +158,7 @@
         <!-- Icons -->
         <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
         <script>
-                                    feather.replace()
+                            feather.replace()
         </script>
 
         <!-- Graphs -->

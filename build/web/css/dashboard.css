@@ -44,6 +44,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: darkslategrey;
+    cursor: pointer;
   }
   
   .sidebar .nav-link {
@@ -61,8 +62,11 @@ body {
   }
   
   .sidebar .nav-link.active {
-    color: white;
-    background-color: darkseagreen;
+    color: black;
+    background-color: white;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+
   }
   
   .sidebar .nav-link:hover .feather,

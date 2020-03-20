@@ -17,7 +17,7 @@ import techquiz.dto.mcqOptionsDTO;
 
 public class McqDAO {
     private static Statement st1;
-    private static PreparedStatement ps,ps1,ps2;
+    private static PreparedStatement ps,ps1,ps2,ps3;
     static{
         try{  
             DatabaseMetaData dbm = DBConnection.getConnection().getMetaData();
@@ -26,11 +26,12 @@ public class McqDAO {
                 st1 = DBConnection.getConnection().createStatement();
                 st1.executeQuery("create table mcq (qid varchar2(10), option1 varchar2(1000), option2 varchar2(1000),option3 varchar2(1000), option4 varchar2(1000), canswer varchar2(30))");
 //                System.out.println("table created");  
+                 st1.executeQuery("commit");
             }
             ps = DBConnection.getConnection().prepareStatement("insert into mcq values (?,?,?,?,?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select option1,option2, option3, option4 from mcq where qid = ?");
             ps2 = DBConnection.getConnection().prepareStatement("select canswer from mcq where qid = ?");
-            
+            ps3 = DBConnection.getConnection().prepareStatement("select * from mcq where qid = ?");
         }
         catch(SQLException ex)
         {
@@ -63,6 +64,21 @@ public class McqDAO {
         rs.next();
         return rs.getString(1);
     }
+    
+    public static mcqDTO getMCQDTOById (String qid) throws SQLException{
+        ps3.setString(1, qid);
+        ResultSet rs = ps3.executeQuery();
+        rs.next();
+        mcqDTO o = new mcqDTO();
+        o.setCanswer(qid);
+        o.setOption1(rs.getString("option1"));
+        o.setOption2(rs.getString("option2"));
+        o.setOption3(rs.getString("option3"));
+        o.setOption4(rs.getString("option4"));
+        o.setCanswer(rs.getString("canswer"));
+        return o;
+    }
+    
 }
 
 

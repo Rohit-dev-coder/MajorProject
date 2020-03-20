@@ -14,10 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import techquiz.dao.ChatFileHandlingDAO;
 import techquiz.dao.ExamDAO;
 import techquiz.dao.UserDAO;
 import techquiz.dto.ExamDTO;
 import techquiz.dto.UserDetails;
+import techquiz.dto.chatmessageDTO;
 
 public class TeacherControllerServlet extends HttpServlet {
 
@@ -71,11 +73,15 @@ public class TeacherControllerServlet extends HttpServlet {
                     ArrayList<ExamDTO> al = ExamDAO.getAllExamByEmail(username);
                     request.setAttribute("allexams", al);
                     rd = request.getRequestDispatcher("declaredrank.jsp");
-                } else if (queryof.equalsIgnoreCase("Forum")) {
-                    rd = request.getRequestDispatcher("Forum.jsp");
+                } else if (queryof.equalsIgnoreCase("wchat")) {
+                    ArrayList<chatmessageDTO> al = ChatFileHandlingDAO.readmsg();
+                    request.setAttribute("msges", al);
+                    rd = request.getRequestDispatcher("wchat.jsp");
                 } else if (queryof.equalsIgnoreCase("News")) {
                     rd = request.getRequestDispatcher("news.jsp");
-                } else if (queryof.equalsIgnoreCase("Settings")) {
+                } else if (queryof.equalsIgnoreCase("Settings")){ 
+                    UserDetails uobj = UserDAO.getSingleUserDetail(username);
+                    request.setAttribute("uobj", uobj);
                     rd = request.getRequestDispatcher("settings.jsp");
                 } else {
                     request.setAttribute("result", "error");

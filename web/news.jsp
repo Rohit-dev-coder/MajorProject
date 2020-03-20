@@ -28,7 +28,8 @@
                          data-show-facepile="false">
                         <blockquote cite="https://www.facebook.com/Department-of-Computer-science-engineering-BUIT-Bhopal-462026-102785731253473" class="fb-xfbml-parse-ignore">
                             <a href="https://www.facebook.com/Department-of-Computer-science-engineering-BUIT-Bhopal-462026-102785731253473">
-                                Department of Computer science &amp; engineering, BUIT, Bhopal 462026
+                                Department of Computer science &amp; engineering, BUIT, Bhopal 462026<br>
+                                Please: Reload page or check your connection
                             </a>
                         </blockquote>
                     </div>

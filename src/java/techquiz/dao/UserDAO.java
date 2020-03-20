@@ -17,7 +17,8 @@ import techquiz.dto.UserDetails;
  */
 public class UserDAO {
 
-    private static PreparedStatement ps, ps1, ps2, ps3;
+    private static Statement st;
+    private static PreparedStatement ps, ps1, ps2, ps3, ps4;
     static {
 
         try {
@@ -25,10 +26,9 @@ public class UserDAO {
             ps1 = DBConnection.getConnection().prepareStatement("Select * from user_details where usertype = ?");
             ps2 = DBConnection.getConnection().prepareStatement("Select * from user_details where email = ?");
             ps3 = DBConnection.getConnection().prepareStatement("select fname,sname from user_details where email = ?");
+            ps4 = DBConnection.getConnection().prepareStatement("update user_details set ? = ? where email = ?");
+            st = DBConnection.getConnection().createStatement();
         } catch (SQLException ex) {
-            if (DBConnection.getConnection() != null) {
-                System.out.println("not null");
-            }
             ex.printStackTrace();
         }
     }
@@ -69,6 +69,7 @@ public class UserDAO {
             obj.setEmail(rs.getString(3));
             obj.setGender(rs.getString(5));
             obj.setMobile(rs.getLong(4));
+            obj.setPwd(rs.getString(6));
         }
 
         return obj;
@@ -80,5 +81,14 @@ public class UserDAO {
         rs.next();
         String r = rs.getString(1) + " " + rs.getString(2);
         return r;
+    }
+    
+    public static boolean updateAttribute(String attr, String val, String email)throws SQLException{
+//        ps4.setString(1, attr);
+//        ps4.setString(2, val);
+//        ps4.setString(3, email);
+//        return ps4.executeUpdate()!=0;
+          return st.executeUpdate("update user_details set "+attr+" = '"+val+"' where email = '"+email+"'")!=0;
+         
     }
 }

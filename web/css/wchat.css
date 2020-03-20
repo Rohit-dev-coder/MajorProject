@@ -1,0 +1,33 @@
+.sender
+{
+    background-color: white;
+    padding: 5px 10px 5px 10px;
+    font-size: 15px;
+    left: 20px;
+    float: left;
+    border-radius: 20px;
+    margin-top: 3px;
+}
+.reciever{
+    background-color: #dcf8c6;
+    color: black;
+    padding: 5px 10px 5px 10px;
+    font-size: 15px;
+    border-radius: 20px;
+    float: right;
+    right: 20px;
+    margin-top: 3px;
+    
+}
+.reciever-info{
+    font-size: 15px;
+    margin-top: 8px;
+    color: #34B7F1;
+}
+
+.sender-info{
+    font-size: 15px;
+    margin-top: 8px;
+    color: #34B7F1;
+    float: right;
+}

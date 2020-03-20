@@ -29,6 +29,7 @@ public class ExamDAO {
                 System.out.println("Table not found");
                 st1 = DBConnection.getConnection().createStatement();
                 st1.executeQuery("create table exam (examid varchar2(5), examtitle varchar2(20), examdatetime timestamp(6), totalquestion number(3), totalmarks number(3), email varchar2(30), status varchar2(5) constraints exam_st_ck check (status in ('NS','S','R','E')))");
+                st1.executeQuery("commit");
                 System.out.println("table created");  
             }
             rs = dbm.getTables(null, null, "ENROLLTABLE", null);

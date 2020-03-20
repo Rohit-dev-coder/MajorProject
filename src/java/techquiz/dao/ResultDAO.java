@@ -22,6 +22,7 @@ public class ResultDAO {
             if(!rs.next()) {
                 st1 = DBConnection.getConnection().createStatement();
                 st1.executeQuery("create table RESULTS (email varchar2(30), examid varchar2(5), totalques number(3), totalattempt number(3), rightans number(3), wrongans number(3), unattempt number(3), totalmarks number(10), percentage number(5,2))");
+                 st1.executeQuery("commit");
             }
             
             ps3 = DBConnection.getConnection().prepareStatement("select email,percentage from results where examid = ? order by percentage desc");

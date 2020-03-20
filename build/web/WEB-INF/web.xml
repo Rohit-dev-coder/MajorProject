@@ -44,6 +44,14 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>techquiz.controller.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WorldChatController</servlet-name>
+        <servlet-class>techquiz.controller.WorldChatController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SettingsController</servlet-name>
+        <servlet-class>techquiz.controller.SettingsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationControllerServlet</servlet-name>
         <url-pattern>/RegistrationControllerServlet</url-pattern>
@@ -83,6 +91,14 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WorldChatController</servlet-name>
+        <url-pattern>/WorldChatController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SettingsController</servlet-name>
+        <url-pattern>/SettingsController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

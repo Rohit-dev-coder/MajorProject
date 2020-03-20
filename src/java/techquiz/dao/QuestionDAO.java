@@ -16,7 +16,7 @@ import techquiz.dto.QuestionDTO;
 
 public class QuestionDAO {
     private static Statement st,st1;
-    private static PreparedStatement ps,ps1,ps2,ps3;
+    private static PreparedStatement ps,ps1,ps2,ps3,ps4,ps5;
     static{
         try{  
             DatabaseMetaData dbm = DBConnection.getConnection().getMetaData();
@@ -24,6 +24,7 @@ public class QuestionDAO {
             if(!rs.next()) {
                 st1 = DBConnection.getConnection().createStatement();
                 st1.executeQuery("create table questions (examid varchar2(5), qtype varchar2(4) constraints ques_ck check (qtype in ('mcq','tf','fups')),qid varchar2(10), question varchar2(4000))");
+                 st1.executeQuery("commit");
             }
             
             st = DBConnection.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
@@ -31,8 +32,10 @@ public class QuestionDAO {
             ps1 = DBConnection.getConnection().prepareStatement("select * from questions where examid = ?");
             ps2 = DBConnection.getConnection().prepareStatement("select qtype from questions where qid = ?");
             ps3 = DBConnection.getConnection().prepareStatement("select qid from questions where examid = ?");
+            ps4 = DBConnection.getConnection().prepareStatement("select * from questions where qid = ?");
+            ps5 = DBConnection.getConnection().prepareStatement("update questions set question = ? where qid = ?");
         }
-        catch(SQLException ex)
+        catch(SQLException ex)  
         {
             ex.printStackTrace();
         }
@@ -89,4 +92,21 @@ public class QuestionDAO {
         return al;
     }
     
+    public static QuestionDTO getQuestionById(String qid) throws SQLException{
+        ps4.setString(1, qid);
+        ResultSet rs = ps4.executeQuery();
+        rs.next();
+        QuestionDTO obj = new QuestionDTO();
+        obj.setExamId(rs.getString("examid"));
+        obj.setqType(rs.getString("qtype"));
+        obj.setQuestion(rs.getString("question"));
+        obj.setQid(rs.getString("qid"));
+        return obj;
+    }
+    
+    public static boolean updateQuestion(String qid,String question) throws SQLException{
+        ps5.setString(1, question);
+        ps5.setString(2, qid);
+        return ps5.executeUpdate()!=0;
+    }
 }
