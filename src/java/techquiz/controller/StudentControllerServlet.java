@@ -15,15 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import techquiz.dao.ChatFileHandlingDAO;
 import techquiz.dao.ExamDAO;
+import techquiz.dao.NoticeDAO;
 import techquiz.dao.ResultDAO;
 import techquiz.dao.UserDAO;
 import techquiz.dto.EnrollDTO;
 import techquiz.dto.ExamDTO;
+import techquiz.dto.NoticeDTO;
 import techquiz.dto.QuestionDTO;
 import techquiz.dto.UserDetails;
 import techquiz.dto.chatmessageDTO;
 import techquiz.dto.examsampleinfo;
 import techquiz.dto.rankDTO;
+import techquiz.dto.resultFrGDTO;
 import techquiz.dto.stdexamdetails;
 import techquiz.dto.testdetail;
 
@@ -56,9 +59,13 @@ public class StudentControllerServlet extends HttpServlet {
                 System.out.println("Queryfor " + queryof);
                 if (queryof.equalsIgnoreCase("profile")) {
                     UserDetails obj = UserDAO.getSingleUserDetail(username);
-//                        System.out.println(obj);
+                    ArrayList<resultFrGDTO> ro = ResultDAO.getResultForGraphByEmail(username);
+                    ArrayList<NoticeDTO> nobj = NoticeDAO.getAllNotice();
                     request.setAttribute("data", obj);
                     request.setAttribute("result", "studentdetails");
+                    request.setAttribute("utype","student");
+                    request.setAttribute("resultforgraph", ro);
+                    request.setAttribute("notices", nobj);
                     rd = request.getRequestDispatcher("userdetails.jsp");
                 } else if (queryof.equalsIgnoreCase("exams")) {
                     testdetail tdo = (testdetail) session.getAttribute("examdetails");

@@ -140,7 +140,48 @@ public class EditQuestionsControllerServlet extends HttpServlet {
                             throw e;
                         }
                         out.print("success");
+                    }else if (queryof.equalsIgnoreCase("mcqoptionupdate")) {
+                        String data = request.getParameter("data");
+                        String qid = request.getParameter("qid");
+                        String option = request.getParameter("option");
+                        boolean result = McqDAO.updateoptions(option, data, qid);
+                        if (result == false) {
+                            Exception e = new Exception();
+                            throw e;
+                        }
+                        out.print("success");
                     }
+                    else if (queryof.equalsIgnoreCase("mcqcansupdate")) {
+                        String data = request.getParameter("data");
+                        String qid = request.getParameter("qid");
+                        boolean result = McqDAO.updateCans(data, qid);
+                        if (result == false) {
+                            Exception e = new Exception();
+                            throw e;
+                        }
+                        out.print("success");
+                    }
+                    else if (queryof.equalsIgnoreCase("tfcansupdate")) {
+                        String data = request.getParameter("data");
+                        String qid = request.getParameter("qid");
+                        boolean result = tfDAO.updateCans(data, qid);
+                        if (result == false) {
+                            Exception e = new Exception();
+                            throw e;
+                        }
+                        out.print("success");
+                    }
+                    else if (queryof.equalsIgnoreCase("updatecansfups")) {
+                        String data = request.getParameter("data");
+                        String qid = request.getParameter("qid");
+                        boolean result = fupsDAO.updateCans(data, qid);
+                        if (result == false) {
+                            Exception e = new Exception();
+                            throw e;
+                        }
+                        out.print("success");
+                    }
+                    
                 }
             } catch (Exception e) {
                 e.printStackTrace();

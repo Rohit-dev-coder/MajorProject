@@ -16,8 +16,8 @@ import techquiz.dto.mcqOptionsDTO;
 
 
 public class McqDAO {
-    private static Statement st1;
-    private static PreparedStatement ps,ps1,ps2,ps3;
+    private static Statement st1,st2;
+    private static PreparedStatement ps,ps1,ps2,ps3,ps4;
     static{
         try{  
             DatabaseMetaData dbm = DBConnection.getConnection().getMetaData();
@@ -32,6 +32,8 @@ public class McqDAO {
             ps1 = DBConnection.getConnection().prepareStatement("select option1,option2, option3, option4 from mcq where qid = ?");
             ps2 = DBConnection.getConnection().prepareStatement("select canswer from mcq where qid = ?");
             ps3 = DBConnection.getConnection().prepareStatement("select * from mcq where qid = ?");
+            st2 = DBConnection.getConnection().createStatement();
+            ps4 = DBConnection.getConnection().prepareStatement("update mcq set canswer = ? where qid = ?");
         }
         catch(SQLException ex)
         {
@@ -77,6 +79,16 @@ public class McqDAO {
         o.setOption4(rs.getString("option4"));
         o.setCanswer(rs.getString("canswer"));
         return o;
+    }
+    
+    public static boolean updateoptions(String option,String data,String qid) throws SQLException{
+        return st2.executeUpdate("update mcq set "+option+" = '"+data+"' where qid = '"+qid+"'")!=0;
+    }
+    
+    public static boolean updateCans(String data, String qid) throws SQLException{
+        ps4.setString(1, data);
+        ps4.setString(2, qid);
+        return ps4.executeUpdate()!=0;
     }
     
 }

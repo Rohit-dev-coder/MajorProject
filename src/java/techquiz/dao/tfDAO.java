@@ -10,7 +10,7 @@ import techquiz.dbutil.DBConnection;
 import techquiz.dto.tfDTO;
 
 public class tfDAO {
-    private static PreparedStatement ps,ps1;
+    private static PreparedStatement ps,ps1,ps2;
     private static Statement st1;
     static{
         try{   
@@ -24,6 +24,7 @@ public class tfDAO {
             }
             ps = DBConnection.getConnection().prepareStatement("insert into tf values (?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select canswer from tf where qid = ?");
+            ps2 = DBConnection.getConnection().prepareStatement("update tf set canswer = ? where qid = ?");
         }
         catch(SQLException ex)
         {
@@ -43,5 +44,10 @@ public class tfDAO {
         ResultSet rs = ps1.executeQuery();
         rs.next();
         return rs.getString(1);
+    }
+    public static boolean updateCans(String data, String qid) throws SQLException{
+        ps2.setString(1, data);
+        ps2.setString(2, qid);
+        return ps2.executeUpdate()!=0;
     }
 }

@@ -7,19 +7,21 @@ package techquiz.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import techquiz.dao.UserDAO;
+import techquiz.dao.NoticeDAO;
 
 /**
  *
  * @author PC
  */
-public class SettingsController extends HttpServlet {
+public class NoticeControllerServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,29 +40,48 @@ public class SettingsController extends HttpServlet {
                 response.sendRedirect("loginpage.html");
                 return;
             }
-            String queryof = (String) request.getParameter("code");
-            if(queryof.equalsIgnoreCase("edit")){
-                String attr = request.getParameter("id");
-                String val = request.getParameter("value");
-                System.out.println("Attr: "+attr+"\n"+"Val: "+val);
-                boolean result = UserDAO.updateAttribute(attr, val, username);
-                System.out.println(result);
-                if(result == true){
-                    pw.print("Saved");
-                }
-                else
-                {
-                    pw.print("Failed");
+
+            if (usertype.equalsIgnoreCase("student")) {
+                session.invalidate();
+                response.sendRedirect("accessdenied.html");
+                return;
+            } else if (usertype.equalsIgnoreCase("teacher")) {
+                String code = (String) request.getParameter("code");
+                if (code.equalsIgnoreCase("post")) {
+                    String msg = (String) request.getParameter("data");
+                    Pattern p = Pattern.compile("<([A-Z][A-Z0-9]*)\\b[^>]*>(.*?)</\\1>");//. represents single character  
+                    Matcher m = p.matcher(msg);
+                    boolean b = m.matches();
+                    msg = msg.replace("<", " ");
+                    msg = msg.replace(">", " ");
+                    msg = msg.replace("/", " ");
+                    if (b == false) {                       
+                        boolean result = NoticeDAO.insertNotice(msg, username);
+                        if (result == false) {
+                            Exception e = new Exception();
+                            throw e;
+                        }
+                        pw.print("success");
+                    }
+                    else{
+                        pw.print("error");
+                    }
+                } else if (code.equalsIgnoreCase("deletepost")) {
+                    String id = (String) request.getParameter("data");
+                    boolean result = NoticeDAO.deleteSingleNotice(id);
+                    if (result == false) {
+                        Exception e = new Exception();
+                        throw e;
+                    }
+                    pw.print("success");
                 }
             }
-                      
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("exception", e);
             rd = request.getRequestDispatcher("showexception.jsp");
-            rd.forward(request, response);            
         } finally {
-            
+
         }
     }
 

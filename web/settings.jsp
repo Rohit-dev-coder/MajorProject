@@ -10,8 +10,8 @@
         return;
     }
     UserDetails uobj = (UserDetails) request.getAttribute("uobj");
-    
-    
+
+
 %>
 <div class="container-fluid dashboardbgimg">
     <div class="col-md-12 mx-auto">
@@ -107,18 +107,18 @@
             <script type="text/javascript">
                 var id;
                 var value;
-               
-                function enableedit(x){
+
+                function enableedit(x) {
                     var id = x.getAttribute("value");
-                    $("#"+id).attr('disabled',false);      
+                    $("#" + id).attr('disabled', false);
                     $("div.actionresult." + id).html("");
-                    $("div.actionresult." + id).append('<button class="btn btn-primary" onclick="update(this)" value="'+id+'">Save</button>');                    
+                    $("div.actionresult." + id).append('<button class="btn btn-primary" onclick="update(this)" value="' + id + '">Save</button>');
                 }
-               
+
                 function update(x) {
                     id = x.getAttribute("value");
                     value = document.getElementById(id).value;
-                    
+
                     var data = {
                         id: id,
                         value: value,
@@ -130,10 +130,10 @@
                     var r = responsText.trim();
                     if (r === "Saved") {
                         $("div.actionresult." + id).html("");
-                        $("#"+id).attr('disabled',true); 
+                        $("#" + id).attr('disabled', true);
                         $("div.actionresult." + id).append("<p>Saved Change</p>");
                         toastr["success"](" SAVED SUCCESSFULLY", "success!");
-                    }else{
+                    } else {
                         $("div.actionresult." + id).html("");
                         $("div.actionresult." + id).append("<p>Error</p>");
                     }

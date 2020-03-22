@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import techquiz.dao.ChatFileHandlingDAO;
 import techquiz.dao.ExamDAO;
+import techquiz.dao.NoticeDAO;
 import techquiz.dao.UserDAO;
 import techquiz.dto.ExamDTO;
+import techquiz.dto.NoticeDTO;
 import techquiz.dto.UserDetails;
 import techquiz.dto.chatmessageDTO;
 
@@ -50,9 +52,11 @@ public class TeacherControllerServlet extends HttpServlet {
                 System.out.println("Queryfor " + queryof);
                 if (queryof.equalsIgnoreCase("profile")) {
                     UserDetails obj = UserDAO.getSingleUserDetail(username);
-                    System.out.println(obj);
+                    ArrayList<NoticeDTO> nobj = NoticeDAO.getAllNotice();
                     request.setAttribute("data", obj);
                     request.setAttribute("result", "studentdetails");
+                    request.setAttribute("utype","teacher");
+                    request.setAttribute("notices", nobj);
                     rd = request.getRequestDispatcher("userdetails.jsp");
                 } else if (queryof.equalsIgnoreCase("Set-exams")) {
                     ExamDTO o = (ExamDTO) session.getAttribute("paperdetails");

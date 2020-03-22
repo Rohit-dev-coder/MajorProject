@@ -16,7 +16,7 @@ import techquiz.dto.mcqDTO;
 
 
 public class fupsDAO {
-    private static PreparedStatement ps,ps1;
+    private static PreparedStatement ps,ps1,ps2;
     private static Statement st1;
     static{
         try{ 
@@ -30,6 +30,7 @@ public class fupsDAO {
             }
             ps = DBConnection.getConnection().prepareStatement("insert into fups values (?,?)");
             ps1 = DBConnection.getConnection().prepareStatement("select canswer from fups where qid = ?");
+            ps2 = DBConnection.getConnection().prepareStatement("update fups set canswer = ? where qid = ?");
         }
         catch(SQLException ex)
         {
@@ -49,5 +50,11 @@ public class fupsDAO {
         ResultSet rs = ps1.executeQuery();
         rs.next();
         return rs.getString(1);
+    }
+    
+    public static boolean updateCans(String data, String qid) throws SQLException{
+        ps2.setString(1, data);
+        ps2.setString(2, qid);
+        return ps2.executeUpdate()!=0;
     }
 }

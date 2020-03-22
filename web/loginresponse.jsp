@@ -12,7 +12,7 @@
             HttpSession sess = request.getSession();
             sess.setAttribute("username", username);
             sess.setAttribute("usertype", utype);
-            sess.setMaxInactiveInterval(60 * 5);
+            sess.setMaxInactiveInterval(60 * 15);
             if (utype.equalsIgnoreCase("student")) {
                 String url = "studentdashboard.jsp;jsessionid=" + session.getId();
                 out.println(url);

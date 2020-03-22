@@ -49,7 +49,8 @@
                     <div class="form-row">
                         <div class="col-lg-8 mx-auto">
                             <div class="form-group">
-                                <label for="question"><b>Question NO:<%=i%></b> <%=obj.getQuestion()%></label>
+                                <label for="question"><b>Question NO:<%=i%></b></label>
+                                <textarea class="form-control" disabled="true"><%=obj.getQuestion()%></textarea>
                             </div>
                         </div>
                     </div>

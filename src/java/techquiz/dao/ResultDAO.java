@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import techquiz.dbutil.DBConnection;
 import techquiz.dto.rankDTO;
 import techquiz.dto.resultDTO;
+import techquiz.dto.resultFrGDTO;
 
 
 public class ResultDAO {
     private static Statement st1;
-    private static PreparedStatement ps1,ps2,ps3,ps4;
+    private static PreparedStatement ps1,ps2,ps3,ps4,ps5;
     static{
         try{   
             DatabaseMetaData dbm = DBConnection.getConnection().getMetaData();
@@ -29,6 +30,7 @@ public class ResultDAO {
             ps1 = DBConnection.getConnection().prepareStatement("insert into results values (?,?,?,?,?,?,?,?,?)");
             ps2 = DBConnection.getConnection().prepareStatement("select * from results where email = ? and examid = ?");
             ps4 = DBConnection.getConnection().prepareStatement("delete from results where examid = ?");
+            ps5 = DBConnection.getConnection().prepareStatement("select examtitle, percentage from results r inner join exam e on e.examid = r.examid where r.email = ?");
         }
         catch(SQLException ex)
         {
@@ -84,5 +86,18 @@ public class ResultDAO {
     public static boolean deleteAllResultbyexamid(String eid) throws SQLException{
         ps4.setString(1, eid);
         return ps4.executeUpdate()!=0;
+    }
+    
+    public static ArrayList<resultFrGDTO> getResultForGraphByEmail(String eid) throws SQLException{
+        ps5.setString(1, eid);
+        ResultSet rs = ps5.executeQuery();
+        ArrayList<resultFrGDTO> al = new ArrayList<resultFrGDTO>();
+        while (rs.next()){
+            resultFrGDTO o = new resultFrGDTO();
+            o.setEtitle(rs.getString(1));
+            o.setPercentage(rs.getDouble(2));
+            al.add(o);
+        }
+        return al;
     }
 }
