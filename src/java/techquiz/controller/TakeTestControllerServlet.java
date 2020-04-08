@@ -26,6 +26,7 @@ import techquiz.dto.ExamDTO;
 import techquiz.dto.QuestionDTO;
 import techquiz.dto.UserDetails;
 import techquiz.dto.answersDTO;
+import techquiz.dto.checkAnswer;
 import techquiz.dto.mcqOptionsDTO;
 import techquiz.dto.stdexamdetails;
 import techquiz.dto.testdetail;
@@ -111,10 +112,12 @@ public class TakeTestControllerServlet extends HttpServlet {
                 } else if (code.equalsIgnoreCase("submitexam")) {
                     testdetail obj = (testdetail)session.getAttribute("examdetails");
                     ArrayList<QuestionDTO> allques = (ArrayList<QuestionDTO>) session.getAttribute("allquestion");
+                    ArrayList<checkAnswer> cansobj = new ArrayList<>();
                     int cans = 0;
                     int wans = 0;
                     int uattemp = 0;
                     for (QuestionDTO o : allques) {
+                        checkAnswer cobj = new checkAnswer();
                         String answer = null;
                         try{
                             answer = request.getParameter(o.getQid()).trim();
@@ -122,10 +125,12 @@ public class TakeTestControllerServlet extends HttpServlet {
                               ++uattemp;
                               continue;
                         }
+                        cobj.setYouranswer(answer);
 //                        System.out.print(o.getQid()+"::::::"+answer);
                         String questype = QuestionDAO.getQuestionType(o.getQid());
                         if (questype.equalsIgnoreCase("mcq")) {
                             String corrans = McqDAO.getcanswer(o.getQid());
+                            cobj.setCanswer(corrans);
 //                            System.out.println(":::::"+corrans);
                             if (answer.equalsIgnoreCase("")) {
                                 ++uattemp;
@@ -136,6 +141,7 @@ public class TakeTestControllerServlet extends HttpServlet {
                             }
                         } else if (questype.equalsIgnoreCase("fups")) {
                             String corrans = fupsDAO.getCorrAnswer(o.getQid());
+                            cobj.setCanswer(corrans);
 //                            System.out.println(":::::"+corrans);
                             if (answer.equalsIgnoreCase("")) {
                                 ++uattemp;
@@ -146,6 +152,7 @@ public class TakeTestControllerServlet extends HttpServlet {
                             }
                         } else if (questype.equalsIgnoreCase("tf")) {                            
                             String corrans = tfDAO.getCorrAnswer(o.getQid());
+                            cobj.setCanswer(corrans);
 //                            System.out.println(":::::"+corrans);
                             if (answer.equalsIgnoreCase("select")) {
                                 ++uattemp;
@@ -155,6 +162,7 @@ public class TakeTestControllerServlet extends HttpServlet {
                                 ++wans;
                             }
                         }
+                        cansobj.add(cobj);
                     }
                     resultDTO robj = new resultDTO();
                     robj.setEmailid(username);
@@ -173,6 +181,7 @@ public class TakeTestControllerServlet extends HttpServlet {
                     session.removeAttribute("questionsoption");
                     session.setMaxInactiveInterval(60*2);
                     request.setAttribute("result", robj);
+                    request.setAttribute("cansobj", cansobj);
 //                    System.out.println(robj);
                     boolean result = ResultDAO.saveResult(robj);
                     if (result == false) {
@@ -182,7 +191,7 @@ public class TakeTestControllerServlet extends HttpServlet {
                     rd = request.getRequestDispatcher("afterexamdetailsresult.jsp");
                 }
                 else if (code.equalsIgnoreCase("resulttest")) {
-                    String examid = (String) request.getParameter("data");
+                   String examid = (String) request.getParameter("data");
                    resultDTO robj = ResultDAO.getResultByid(username, examid);
                    if (robj == null) {
                         Exception e = new Exception();

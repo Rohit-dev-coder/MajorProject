@@ -1,13 +1,15 @@
 // default
-
-var elemfs= null;
+var WatchTotalTime = null;
+var isvideoON = false;
+var videoduration = null;
+var elemfs = null;
 window.onresize = function () {
-    if(elemfs === null){
+    if (elemfs === null) {
         this.onloadmyfunction();
     }
-    
 };
 window.onload = function () {
+    startTime();
     this.onloadmyfunction();
 };
 
@@ -35,20 +37,18 @@ function onloadmyfunction()
     l.classList.remove("active");
     var atabLinks = document.querySelector("#Profile");
     atabLinks.classList.add("active");
-
     clearDataResult();
     var data = {
         data: "profile"
     };
     $.post("StudentControllerServlet", data, processresponse);
-
 }
 
 function processresponse(responseText) {
     responseText = responseText.trim();
     clearDataResult();
     $(".data-result").append(responseText);
-    
+
 }
 
 function clearDataResult()
@@ -75,27 +75,55 @@ function showContent(e)
     var data = {
         data: id
     };
-    clearDataResult();
+    clearDataResult();    
+    if(isvideoON === true){
+        isvideoON = false;
+        clearInterval(videoduration);
+        updateRec();
+    }
     $.post("StudentControllerServlet", data, processresponse);
 }
 
-function logoutdas(x){
+function logoutdas(x) {
     var id = x.getAttribute("id");
+    var result = confirm("Are You Sure?");
+    if(result === false){
+        return;
+    }
     var data = {
         code: id
     };
     clearDataResult();
-    $.post("LogoutController", data, function(responseText){
+    $.post("LogoutController", data, function (responseText) {
         responseText = responseText.trim();
         console.log(responseText);
-        if(responseText.indexOf("html") != -1){
+        if (responseText.indexOf("html") != -1) {
             window.location = responseText;
-        }else{
+        } else {
             window.location = "accessdenied.html";
         }
     });
 }
-
+function startTime() {
+    
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    
+    document.getElementById('showtime').innerHTML =
+            "<p>"+h + ":" + m + ":" + s + "</p>";
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i
+    }
+    ;  // add zero in front of numbers < 10
+    return i;
+}
 
 //loader js Required
 $('.loader').hide();

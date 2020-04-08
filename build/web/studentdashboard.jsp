@@ -61,11 +61,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto ml-auto">
-                    
 
                 </ul>
-                <div class="btn-group mt-2">
-                    <button type="button" class="btn btn-info" onclick="onloadmyfunction()"><%=userid%></button>
+
+                <span id="showtime" style="color: white; font-size: 25px; padding-right: 20px;">
+                </span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger" onclick="logoutdas(this)">LOGOUT</button>
                 </div>
 
             </div>
@@ -81,6 +83,12 @@
                                 <span class="nav-link active" id="Profile" onclick="showContent(this)" >
                                     <span data-feather="home"></span>
                                     Profile
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                <span class="nav-link" id="Learn" onclick="showContent(this)" >
+                                    <span data-feather="home"></span>
+                                    Learn
                                 </span>
                             </li>
                             <li class="nav-item">
@@ -114,13 +122,6 @@
                                     Settings
                                 </span>
                             </li>
-                            <li class="nav-item">
-                                <span class="nav-link" id="Logout" onclick="logoutdas(this)">
-                                    <span data-feather="settings"></span>
-                                    LOGOUT
-                                </span>
-                            </li>
-
                         </ul>
 
 

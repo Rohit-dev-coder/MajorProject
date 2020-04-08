@@ -56,6 +56,10 @@
         <servlet-name>NoticeControllerServlet</servlet-name>
         <servlet-class>techquiz.controller.NoticeControllerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LearningControllerServlet</servlet-name>
+        <servlet-class>techquiz.controller.LearningControllerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationControllerServlet</servlet-name>
         <url-pattern>/RegistrationControllerServlet</url-pattern>
@@ -107,6 +111,10 @@
     <servlet-mapping>
         <servlet-name>NoticeControllerServlet</servlet-name>
         <url-pattern>/NoticeControllerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LearningControllerServlet</servlet-name>
+        <url-pattern>/LearningControllerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

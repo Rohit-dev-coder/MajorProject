@@ -96,6 +96,8 @@ public class StudentControllerServlet extends HttpServlet {
                     ArrayList<examsampleinfo> al = ExamDAO.getAllDeclaredExamDetails();
                     request.setAttribute("al", al);
                     rd = request.getRequestDispatcher("resultlistforstudent.jsp");
+                } else if (queryof.equalsIgnoreCase("Learn")) {                    
+                    rd = request.getRequestDispatcher("LearningControllerServlet?code=Learn");
                 } else if (queryof.equalsIgnoreCase("News")) {
                     rd = request.getRequestDispatcher("news.jsp");
                 } else if (queryof.equalsIgnoreCase("wchat")) {

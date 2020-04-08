@@ -54,13 +54,13 @@
             if (utype.equalsIgnoreCase("student")) {
                 ArrayList<resultFrGDTO> ro = (ArrayList<resultFrGDTO>) request.getAttribute("resultforgraph");
         %>
-        <div class="col-lg-8 mx-auto">
+        <div class="col-lg-6 mx-auto">
             <div class="resultBox">
                 <div class="resultBox">
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <canvas id="myChart" width="200" height="85"></canvas>
+                                <canvas id="myChart" width="200" height="115"></canvas>
                             </div>
                             <div class="carousel-item" >
                                 <table class="table">
@@ -116,10 +116,34 @@
                 </div>
             </div>        
         </div>
+        <div class="col-md-2">
+            <div class="resultBox">
+                <div class="calender" style="font-size: 20px; padding-top: 45px; padding-bottom: 45px ; align-items: center; text-align: center;">
+                    <div class="showdate" style="font-size: 4.5rem;font-weight: bold;">
+                    </div>
+                    <div class="showsmyd">
+                    </div>
+                    <div class="showdays">
+                    </div>
+                </div>
+            </div>
+        </div>
         <script type="text/javascript">
+            var allmonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var alldays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday'];
+            var currdate = new Date();
+            var date = currdate.getDate();
+            var month = allmonths[currdate.getMonth()];
+            var days = alldays[currdate.getDay()];
+            $('.showdate').html("<p>" + date + "</p>");
+            $('.showsmyd').html("<span>" + month + ", </span>" + "<span>" + currdate.getFullYear() + "</span>");
+            $('.showdays').html("<p>" + days + "</p>");
+
+
+
             var ctx = document.getElementById('myChart').getContext('2d');
-            var martitle = ["hindi", "english"];
-            var marks = ["40", "20"];
+            var martitle = [];
+            var marks = [];
             <%
                 for (resultFrGDTO o : ro) {
             %>
@@ -212,7 +236,7 @@
         <div class="col-md-12">
             <div class="resultBox">
                 <div>                    
-                    <div id="carouselExampleControls2" class="carousel slide carousel-fade" data-ride="carousel">
+                    <div id="carouselExampleControls2" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active" style="padding: 85px">
                                 <span class="dashboardHeading"><center><b>NOTICE BOARD</b></center></span>
@@ -225,7 +249,7 @@
                             <div class="carousel-item" style="padding: 30px 100px">
                                 <div class="container-fluid">
                                     <div class="row" style="color: gainsboro">
-                                        <div class="col-md-6"><b>Message NO: <%=++ii%></b></div>
+                                        <div class="col-md-6"><b>Message NO: <%=++ii%>/<%=nobj.size()%></b></div>
                                         <div class="col-md-6"><b>DATE and TIME: </b><%=o.getDate()%></div>
                                     </div>
                                     <hr style="height: 2px">

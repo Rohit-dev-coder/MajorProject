@@ -65,8 +65,10 @@
                 <ul class="navbar-nav mr-auto ml-auto">
 
                 </ul>
-                <div class="btn-group mt-2">
-                    <button type="button" class="btn btn-info" onclick="onloadmyfunction()"><%=userid%></button>
+                <span id="showtime" style="color: white; font-size: 25px; padding-right: 20px; padding-top: 10px;">
+                </span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger" onclick="logoutdas(this)">LOGOUT</button>
                 </div>
 
             </div>
@@ -121,13 +123,6 @@
                                     Settings
                                 </span>
                             </li>
-                            <li class="nav-item">
-                                <span class="nav-link" id="Logout" onclick="logoutdas(this)">
-                                    <span data-feather="settings"></span>
-                                    LOGOUT
-                                </span>
-                            </li>
-
                         </ul>
 
 
@@ -158,7 +153,7 @@
         <!-- Icons -->
         <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
         <script>
-                            feather.replace()
+                                    feather.replace()
         </script>
 
         <!-- Graphs -->
