@@ -14,7 +14,7 @@ public class DBConnection {
     static {
         try {
             Class.forName("oracle.jdbc.OracleDriver");
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@//LAPTOP-GGNGDNPF:1521/xe", "paildb", "pail");
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/xe", "paildb", "pail");
             System.out.println("Connection opened");            
 //            DatabaseMetaData dbm = conn.getMetaData();
 //            ResultSet rs = dbm.getSchemas();
