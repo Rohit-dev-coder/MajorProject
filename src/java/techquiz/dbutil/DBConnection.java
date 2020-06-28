@@ -16,22 +16,6 @@ public class DBConnection {
             Class.forName("oracle.jdbc.OracleDriver");
             conn = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/xe", "paildb", "pail");
             System.out.println("Connection opened");            
-//            DatabaseMetaData dbm = conn.getMetaData();
-//            ResultSet rs = dbm.getSchemas();
-//            int fdcount = 0;
-//            while(rs.next()){
-//                String dbname = rs.getString(1);
-//                if(dbname.equalsIgnoreCase("paildb12")){
-//                    fdcount++;
-//                    break;
-//                }
-//            }
-//            if(fdcount==0){
-//                Statement st = conn.createStatement();
-//                st.executeQuery("grant connect to create user paildb12 identified by pail");
-//                System.out.println("user created");
-//                
-//            }
 
         } catch (Exception e) {
 
